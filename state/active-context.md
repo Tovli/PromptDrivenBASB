@@ -2,7 +2,7 @@
 title: "Active Context"
 type: "state"
 status: "active"
-updated_at: "2026-04-05T13:10:52.6376896+03:00"
+updated_at: "2026-04-05T13:14:42.3977827+03:00"
 tags:
   - "basb"
   - "active-context"
@@ -12,7 +12,7 @@ related_docs:
 ---
 # Current Focus
 
-`prompt-driven-basb@0.1.0` is now live on npm with the `latest` dist-tag pointing at `0.1.0`. The next likely step is post-release cleanup, documentation refinement, or preparing the next version bump.
+`prompt-driven-basb@0.1.1` is prepared with MIT licensing, fresh tests, and a verified tarball. The only remaining step is publishing it with a current npm one-time password so `latest` can move from `0.1.0` to `0.1.1`.
 
 # Current Boundaries
 
@@ -22,12 +22,12 @@ related_docs:
 
 # Recommended Next Actions
 
-1. Verify install and runtime usage from a clean consumer project with `npm install prompt-driven-basb`.
-2. Decide whether the public package should keep the current `UNLICENSED` metadata in `package.json`.
-3. If package shape changes again, rerun `npm.cmd test`, `npm.cmd pack --dry-run`, and verify `npm.cmd view prompt-driven-basb version` after publish.
+1. Provide the current npm OTP and rerun `npm.cmd publish --access public --otp=<code>` for `0.1.1`.
+2. After publish, verify `npm.cmd view prompt-driven-basb version dist-tags --json` shows `latest: 0.1.1`.
+3. Verify install and runtime usage from a clean consumer project with `npm install prompt-driven-basb`.
 
 # Recently Touched
 
-- `state/active-context.md`
-- `state/decision-log.md`
+- `LICENSE`
+- `README.md`
 - `package.json`

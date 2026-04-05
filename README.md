@@ -40,6 +40,10 @@ Local verification commands:
 - `npm test`
 - `npm run pack:check`
 
+## License
+
+MIT
+
 ## Session Start
 
 For a normal BASB session, read these in order:

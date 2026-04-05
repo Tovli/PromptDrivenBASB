@@ -1,6 +1,6 @@
 {
   "name": "prompt-driven-basb",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Prompt-driven Building a Second Brain workspace packaged for npm.",
   "keywords": [
     "basb",
@@ -9,7 +9,7 @@
     "markdown",
     "knowledge-management"
   ],
-  "license": "UNLICENSED",
+  "license": "MIT",
   "type": "commonjs",
   "main": "./index.js",
   "types": "./index.d.ts",
@@ -24,6 +24,7 @@
   "files": [
     "AGENTS.md",
     "BASBGuide.md",
+    "LICENSE",
     "README.md",
     "docs",
     "examples",
