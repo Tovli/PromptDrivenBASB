@@ -1,0 +1,12 @@
+{
+  "classification": "resources",
+  "destination_path": "vault/resources/research-operations-for-small-teams.md",
+  "semantic_tags": [
+    "research-ops",
+    "knowledge-management",
+    "actionability"
+  ],
+  "actionability_summary": "This article is reference material with future value, but it is not itself an active project or ongoing responsibility.",
+  "confidence_score": 0.91,
+  "requires_human_review": false
+}
