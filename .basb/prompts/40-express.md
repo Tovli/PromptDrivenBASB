@@ -11,7 +11,7 @@ requires_review_when:
   - "The context set is too broad to support a reliable output"
   - "The requested output would require unsupported claims"
 related_docs:
-  - "docs/prompts/02-context-selection.md"
+  - ".basb/prompts/02-context-selection.md"
   - "templates/daily-brief.md"
 tags:
   - "basb"

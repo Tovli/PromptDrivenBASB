@@ -9,8 +9,8 @@ outputs:
 requires_review_when:
   - "The note lacks enough signal for a trustworthy synthesis"
 related_docs:
-  - "docs/prompts/31-distill-layer3.md"
-  - "docs/prompts/40-express.md"
+  - ".basb/prompts/31-distill-layer3.md"
+  - ".basb/prompts/40-express.md"
 tags:
   - "basb"
   - "prompt"

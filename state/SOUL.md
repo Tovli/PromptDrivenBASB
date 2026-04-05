@@ -2,14 +2,14 @@
 title: "BASB Soul"
 type: "state"
 status: "active"
-updated_at: "2026-04-05T15:00:57.0720244+03:00"
+updated_at: "2026-04-05T16:04:15.9555516+03:00"
 tags:
   - "basb"
   - "soul"
   - "operating-charter"
 related_docs:
   - "BASBGuide.md"
-  - "docs/plans/2026-04-04-basb-codex-workflow.md"
+  - ".basb/plans/2026-04-04-basb-codex-workflow.md"
 ---
 # Mission
 

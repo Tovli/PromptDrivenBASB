@@ -2,7 +2,7 @@
 title: "BASB Master System Prompt"
 purpose: "Define the operating rules for Codex when acting as the BASB engine."
 stage: "maintain"
-updated_at: "2026-04-05T15:00:57.0720244+03:00"
+updated_at: "2026-04-05T16:04:15.9555516+03:00"
 inputs:
   - "BASBGuide.md"
   - "state/SOUL.md"
@@ -15,7 +15,7 @@ requires_review_when:
   - "A note could reasonably belong to multiple P.A.R.A. categories"
   - "The source material is too sparse to summarize responsibly"
 related_docs:
-  - "docs/plans/2026-04-04-basb-codex-workflow.md"
+  - ".basb/plans/2026-04-04-basb-codex-workflow.md"
   - "state/SOUL.md"
 tags:
   - "basb"
@@ -51,7 +51,7 @@ Read these before acting:
 # Prompt Intake Rule
 
 - Classify the current user prompt before doing anything else: new capture, existing-note work, BASB-system maintenance, or transient conversation.
-- If it is new material that should live in the second brain, run `docs/prompts/10-capture.md` and apply the routing decision from `docs/prompts/20-organize-route.md`.
+- If it is new material that should live in the second brain, run `.basb/prompts/10-capture.md` and apply the routing decision from `.basb/prompts/20-organize-route.md`.
 - If it refers to an existing note, scan that note's frontmatter before reading the full body.
 - Do not leave durable user input only in chat when it should become a note, review item, or other BASB artifact.
 

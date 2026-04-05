@@ -8,7 +8,7 @@ tags:
   - "review-queue"
 related_docs:
   - "state/SOUL.md"
-  - "docs/prompts/21-human-review.md"
+  - ".basb/prompts/21-human-review.md"
 ---
 # Pending Items
 

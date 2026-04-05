@@ -10,7 +10,7 @@ outputs:
 requires_review_when:
   - "The candidate set stays too broad after filtering"
 related_docs:
-  - "docs/prompts/01-session-start.md"
+  - ".basb/prompts/01-session-start.md"
   - "state/MEMORY.md"
 tags:
   - "basb"

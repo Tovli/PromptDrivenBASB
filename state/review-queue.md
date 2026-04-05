@@ -2,13 +2,13 @@
 title: "Review Queue"
 type: "state"
 status: "active"
-updated_at: "2026-04-05T09:37:10.4841057+03:00"
+updated_at: "2026-04-05T16:04:15.9555516+03:00"
 tags:
   - "basb"
   - "review-queue"
 related_docs:
   - "state/SOUL.md"
-  - "docs/prompts/21-human-review.md"
+  - ".basb/prompts/21-human-review.md"
 ---
 # Pending Items
 

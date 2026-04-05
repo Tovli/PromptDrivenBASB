@@ -2,7 +2,7 @@
 title: "BASB Capture"
 purpose: "Normalize raw material, including new user prompts, route it immediately when possible, and use inbox only as a temporary fallback."
 stage: "capture"
-updated_at: "2026-04-05T15:00:57.0720244+03:00"
+updated_at: "2026-04-05T16:04:15.9555516+03:00"
 inputs:
   - "A new user prompt, idea, instruction, question, or plan that introduces durable information"
   - "Raw pasted text, article content, meeting notes, or other source material"
@@ -19,7 +19,7 @@ related_docs:
   - "templates/area-note.md"
   - "templates/resource-note.md"
   - "templates/archive-note.md"
-  - "docs/prompts/20-organize-route.md"
+  - ".basb/prompts/20-organize-route.md"
 tags:
   - "basb"
   - "prompt"
@@ -34,7 +34,7 @@ Convert raw material into a normalized note and route it immediately when the ne
 1. Treat a new user prompt as source material when it introduces durable information, commitments, ideas, questions, or reference content that belongs in the second brain.
 2. Only skip capture when the prompt is clearly BASB-system maintenance, work on an existing note, or transient conversation.
 3. Preserve the source material in the note body.
-4. Run the routing decision during capture by applying `docs/prompts/20-organize-route.md`.
+4. Run the routing decision during capture by applying `.basb/prompts/20-organize-route.md`.
 5. If routing confidence is `0.80` or higher, place the note directly in its final `vault/projects/`, `vault/areas/`, `vault/resources/`, or `vault/archives/` destination in the same session.
 6. Use `vault/inbox/` only when automatic routing cannot be done responsibly because the source is incomplete, ambiguous, or below the routing confidence threshold.
 7. Infer a concise title from the material.

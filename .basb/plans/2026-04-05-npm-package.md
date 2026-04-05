@@ -21,7 +21,7 @@
 Create a Node test that imports the package entrypoint and asserts:
 
 - the package root resolves to an existing directory
-- exported asset paths exist for key files such as `README.md` and `docs/prompts/00-master-system.md`
+- exported asset paths exist for key files such as `README.md` and `.basb/prompts/00-master-system.md`
 - prompt listing includes `00-master-system.md`
 
 **Step 2: Run test to verify it fails**

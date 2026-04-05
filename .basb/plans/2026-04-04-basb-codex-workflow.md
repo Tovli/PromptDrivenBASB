@@ -86,7 +86,7 @@ Then keep the body simple, for example:
 
 ```text
 BASBGuide.md
-docs/
+.basb/
   plans/
   prompts/
     00-master-system.md
@@ -186,7 +186,7 @@ Recommended body shape for notes:
 
 ### Prompt File Frontmatter Contract
 
-Prompt files in `docs/prompts/` should also use frontmatter so Codex can quickly understand when each prompt applies.
+Prompt files in `.basb/prompts/` should also use frontmatter so Codex can quickly understand when each prompt applies.
 
 ```yaml
 ---
@@ -200,7 +200,7 @@ outputs:
 requires_review_when:
   - "<condition>"
 related_docs:
-  - "docs/plans/2026-04-04-basb-codex-workflow.md"
+  - ".basb/plans/2026-04-04-basb-codex-workflow.md"
 tags:
   - "basb"
   - "prompt"
@@ -305,9 +305,9 @@ Do not start by asking Codex to "be my second brain" in one giant prompt. Build 
 **Outcome:** Create the reusable prompt files that define how Codex behaves as BASB across sessions.
 
 **Files:**
-- Create: `docs/prompts/00-master-system.md`
-- Create: `docs/prompts/01-session-start.md`
-- Create: `docs/prompts/02-context-selection.md`
+- Create: `.basb/prompts/00-master-system.md`
+- Create: `.basb/prompts/01-session-start.md`
+- Create: `.basb/prompts/02-context-selection.md`
 
 **Instructions for Codex:**
 
@@ -327,9 +327,9 @@ Do not start by asking Codex to "be my second brain" in one giant prompt. Build 
 **Outcome:** Allow Codex to normalize raw inputs and route them into P.A.R.A. using prompts only.
 
 **Files:**
-- Create: `docs/prompts/10-capture.md`
-- Create: `docs/prompts/20-organize-route.md`
-- Create: `docs/prompts/21-human-review.md`
+- Create: `.basb/prompts/10-capture.md`
+- Create: `.basb/prompts/20-organize-route.md`
+- Create: `.basb/prompts/21-human-review.md`
 - Create: `templates/inbox-note.md`
 - Create: `templates/project-note.md`
 - Create: `templates/area-note.md`
@@ -356,9 +356,9 @@ Do not start by asking Codex to "be my second brain" in one giant prompt. Build 
 **Outcome:** Distill notes through reusable layered prompts without losing source material.
 
 **Files:**
-- Create: `docs/prompts/30-distill-layer2.md`
-- Create: `docs/prompts/31-distill-layer3.md`
-- Create: `docs/prompts/32-distill-layer4.md`
+- Create: `.basb/prompts/30-distill-layer2.md`
+- Create: `.basb/prompts/31-distill-layer3.md`
+- Create: `.basb/prompts/32-distill-layer4.md`
 
 **Instructions for Codex:**
 
@@ -380,7 +380,7 @@ Do not start by asking Codex to "be my second brain" in one giant prompt. Build 
 **Outcome:** Use the vault to produce useful outputs such as plans, syntheses, and project briefs.
 
 **Files:**
-- Create: `docs/prompts/40-express.md`
+- Create: `.basb/prompts/40-express.md`
 - Create: `templates/daily-brief.md`
 - Create: `templates/weekly-review.md`
 
@@ -403,9 +403,9 @@ Do not start by asking Codex to "be my second brain" in one giant prompt. Build 
 **Outcome:** Give Codex repeatable prompts for system upkeep without background automation.
 
 **Files:**
-- Create: `docs/prompts/50-daily-brief.md`
-- Create: `docs/prompts/60-weekly-maintenance.md`
-- Create: `docs/prompts/70-favorite-problems.md`
+- Create: `.basb/prompts/50-daily-brief.md`
+- Create: `.basb/prompts/60-weekly-maintenance.md`
+- Create: `.basb/prompts/70-favorite-problems.md`
 
 **Instructions for Codex:**
 
@@ -429,7 +429,7 @@ Do not start by asking Codex to "be my second brain" in one giant prompt. Build 
 - Create: `examples/raw-captures/example-meeting.md`
 - Create: `examples/expected-outputs/routing-example.json`
 - Create: `examples/expected-outputs/distillation-example.md`
-- Create: `docs/prompts/README.md`
+- Create: `.basb/prompts/README.md`
 
 **Instructions for Codex:**
 
@@ -481,7 +481,7 @@ Do not dump the entire vault into context. Prefer:
 ```text
 Read BASBGuide.md.
 Read state/SOUL.md, state/MEMORY.md, and state/active-context.md.
-Read docs/prompts/00-master-system.md and [TASK_PROMPT].
+Read .basb/prompts/00-master-system.md and [TASK_PROMPT].
 
 Operate as the BASB system for this workspace.
 
@@ -502,7 +502,7 @@ After editing, summarize what changed and any pending review items.
 ## Recommended First Prompt
 
 ```text
-Read BASBGuide.md and docs/plans/2026-04-04-basb-codex-workflow.md.
+Read BASBGuide.md and .basb/plans/2026-04-04-basb-codex-workflow.md.
 Implement Phase 1 only: Vault and State Foundations.
 Create the vault folders, state files, and README so this workspace can operate as a prompt-driven BASB system.
 Do not add Python, APIs, databases, or schedulers.

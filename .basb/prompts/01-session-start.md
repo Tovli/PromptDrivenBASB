@@ -2,7 +2,7 @@
 title: "BASB Session Start"
 purpose: "Start any BASB session consistently, classify the incoming prompt, and gather only the minimum viable context."
 stage: "maintain"
-updated_at: "2026-04-05T15:00:57.0720244+03:00"
+updated_at: "2026-04-05T16:04:15.9555516+03:00"
 inputs:
   - "state/SOUL.md"
   - "state/MEMORY.md"
@@ -12,7 +12,7 @@ outputs:
 requires_review_when:
   - "The task is ambiguous after reading the core state files"
 related_docs:
-  - "docs/prompts/00-master-system.md"
+  - ".basb/prompts/00-master-system.md"
   - "state/active-context.md"
 tags:
   - "basb"
@@ -31,7 +31,7 @@ tags:
 # Prompt Intake Default
 
 - Unless the user clearly points to an existing note or requests BASB-system maintenance, treat the current prompt as potential second-brain material.
-- If the prompt introduces net-new durable information, run `docs/prompts/10-capture.md` first and route it in the same session when confidence permits.
+- If the prompt introduces net-new durable information, run `.basb/prompts/10-capture.md` first and route it in the same session when confidence permits.
 - Do not leave durable prompt content only in conversation history when it should be persisted as a BASB note or review item.
 
 # Before Editing

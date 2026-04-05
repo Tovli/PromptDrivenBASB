@@ -8,7 +8,7 @@ tags:
   - "memory"
 related_docs:
   - "state/SOUL.md"
-  - "docs/prompts/00-master-system.md"
+  - ".basb/prompts/00-master-system.md"
 ---
 # Stable Conventions
 
@@ -32,10 +32,10 @@ related_docs:
 
 # Useful Paths
 
-- Master prompt: `docs/prompts/00-master-system.md`
-- Session start: `docs/prompts/01-session-start.md`
-- Capture: `docs/prompts/10-capture.md`
-- Routing: `docs/prompts/20-organize-route.md`
+- Master prompt: `.basb/prompts/00-master-system.md`
+- Session start: `.basb/prompts/01-session-start.md`
+- Capture: `.basb/prompts/10-capture.md`
+- Routing: `.basb/prompts/20-organize-route.md`
 - Review queue: `state/review-queue.md`
 
 # Notes

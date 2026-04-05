@@ -5,8 +5,8 @@ This workspace implements BASB as a Codex-operated prompt system, not as an exte
 ## What This Repository Contains
 
 - `BASBGuide.md`: the architectural source document.
-- `docs/plans/`: the implementation plan for the prompt system.
-- `docs/prompts/`: reusable prompts for BASB operations.
+- `.basb/plans/`: the implementation plan for the prompt system.
+- `.basb/prompts/`: reusable prompts for BASB operations.
 - `state/`: durable operating memory, review queues, and decision logs.
 - `templates/`: note and brief templates with YAML frontmatter.
 - `vault/`: the working knowledge base.
@@ -58,8 +58,8 @@ For a normal BASB session, read these in order:
 2. `state/SOUL.md`
 3. `state/MEMORY.md`
 4. `state/active-context.md`
-5. `docs/prompts/00-master-system.md`
-6. The task-specific prompt in `docs/prompts/`
+5. `.basb/prompts/00-master-system.md`
+6. The task-specific prompt in `.basb/prompts/`
 
 ## Typical Workflow
 
@@ -84,9 +84,9 @@ Keep the note body for actual content, extracted insight, and next actions.
 
 ## First Real Use
 
-1. Put a real capture in `vault/inbox/` using `docs/prompts/10-capture.md`.
-2. Route it with `docs/prompts/20-organize-route.md`.
-3. If ambiguous, queue it with `docs/prompts/21-human-review.md`.
+1. Put a real capture in `vault/inbox/` using `.basb/prompts/10-capture.md`.
+2. Route it with `.basb/prompts/20-organize-route.md`.
+3. If ambiguous, queue it with `.basb/prompts/21-human-review.md`.
 4. Distill it with the `30-32` prompt chain.
 
 ## Scope Boundary

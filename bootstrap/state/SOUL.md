@@ -9,7 +9,7 @@ tags:
   - "operating-charter"
 related_docs:
   - "BASBGuide.md"
-  - "docs/prompts/00-master-system.md"
+  - ".basb/prompts/00-master-system.md"
 ---
 # Mission
 

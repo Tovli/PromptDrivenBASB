@@ -2,12 +2,12 @@
 title: "Favorite Problems"
 type: "state"
 status: "active"
-updated_at: "2026-04-05T09:37:10.4841057+03:00"
+updated_at: "2026-04-05T16:04:15.9555516+03:00"
 tags:
   - "basb"
   - "favorite-problems"
 related_docs:
-  - "docs/prompts/70-favorite-problems.md"
+  - ".basb/prompts/70-favorite-problems.md"
   - "state/MEMORY.md"
 ---
 # Purpose

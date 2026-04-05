@@ -7,12 +7,12 @@ const namedAssetPaths = Object.freeze({
   agents: 'AGENTS.md',
   guide: 'BASBGuide.md',
   readme: 'README.md',
-  promptsDir: path.join('docs', 'prompts'),
+  promptsDir: path.join('.basb', 'prompts'),
   templatesDir: 'templates',
   stateDir: path.join('bootstrap', 'state'),
   vaultDir: 'vault',
-  masterPrompt: path.join('docs', 'prompts', '00-master-system.md'),
-  capturePrompt: path.join('docs', 'prompts', '10-capture.md'),
+  masterPrompt: path.join('.basb', 'prompts', '00-master-system.md'),
+  capturePrompt: path.join('.basb', 'prompts', '10-capture.md'),
 });
 
 function resolveAssetPath(...segments) {

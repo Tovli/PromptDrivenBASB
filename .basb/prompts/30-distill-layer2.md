@@ -9,7 +9,7 @@ outputs:
 requires_review_when:
   - "The note is too sparse or fragmented to identify key concepts responsibly"
 related_docs:
-  - "docs/prompts/31-distill-layer3.md"
+  - ".basb/prompts/31-distill-layer3.md"
   - "templates/resource-note.md"
 tags:
   - "basb"

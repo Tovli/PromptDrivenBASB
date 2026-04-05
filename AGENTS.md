@@ -2,7 +2,7 @@
 title: "BASB Agent Instructions"
 type: "state"
 status: "active"
-updated_at: "2026-04-05T15:00:57.0720244+03:00"
+updated_at: "2026-04-05T16:04:15.9555516+03:00"
 tags:
   - "basb"
   - "agent"
@@ -11,7 +11,7 @@ related_docs:
   - "README.md"
   - "BASBGuide.md"
   - "state/SOUL.md"
-  - "docs/prompts/00-master-system.md"
+  - ".basb/prompts/00-master-system.md"
 ---
 # Purpose
 
@@ -26,8 +26,8 @@ For any new session, read these files in order:
 3. `state/SOUL.md`
 4. `state/MEMORY.md`
 5. `state/active-context.md`
-6. `docs/prompts/00-master-system.md`
-7. The task-specific prompt in `docs/prompts/`
+6. `.basb/prompts/00-master-system.md`
+7. The task-specific prompt in `.basb/prompts/`
 
 If the task is specific to an existing note, read that note after scanning its frontmatter.
 
@@ -65,7 +65,7 @@ Use vault-relative paths in `related_docs`.
 
 # Repository Layout
 
-- `docs/prompts/`: BASB workflow prompts
+- `.basb/prompts/`: BASB workflow prompts
 - `state/`: persistent operating state
 - `templates/`: note and brief templates
 - `vault/`: BASB knowledge base
@@ -75,15 +75,15 @@ Use vault-relative paths in `related_docs`.
 
 Use the smallest prompt that fits the task:
 
-- new prompt intake or ad hoc idea capture: `docs/prompts/10-capture.md` then `docs/prompts/20-organize-route.md`
-- capture: `docs/prompts/10-capture.md`
-- route: `docs/prompts/20-organize-route.md`
-- ambiguous routing: `docs/prompts/21-human-review.md`
-- distill: `docs/prompts/30-distill-layer2.md`, `31-distill-layer3.md`, `32-distill-layer4.md`
-- express: `docs/prompts/40-express.md`
-- daily maintenance: `docs/prompts/50-daily-brief.md`
-- weekly maintenance: `docs/prompts/60-weekly-maintenance.md`
-- favorite problems review: `docs/prompts/70-favorite-problems.md`
+- new prompt intake or ad hoc idea capture: `.basb/prompts/10-capture.md` then `.basb/prompts/20-organize-route.md`
+- capture: `.basb/prompts/10-capture.md`
+- route: `.basb/prompts/20-organize-route.md`
+- ambiguous routing: `.basb/prompts/21-human-review.md`
+- distill: `.basb/prompts/30-distill-layer2.md`, `31-distill-layer3.md`, `32-distill-layer4.md`
+- express: `.basb/prompts/40-express.md`
+- daily maintenance: `.basb/prompts/50-daily-brief.md`
+- weekly maintenance: `.basb/prompts/60-weekly-maintenance.md`
+- favorite problems review: `.basb/prompts/70-favorite-problems.md`
 
 # Routing Contract
 

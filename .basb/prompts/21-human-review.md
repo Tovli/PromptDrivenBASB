@@ -10,7 +10,7 @@ requires_review_when:
   - "This prompt is being used"
 related_docs:
   - "state/review-queue.md"
-  - "docs/prompts/20-organize-route.md"
+  - ".basb/prompts/20-organize-route.md"
 tags:
   - "basb"
   - "prompt"

@@ -3,13 +3,13 @@ title: "BASB Prompt Catalog"
 purpose: "Describe the available BASB prompt files and how to use them."
 stage: "maintain"
 inputs:
-  - "docs/prompts/"
+  - ".basb/prompts/"
 outputs:
   - "A quick operator guide for the prompt pack"
 requires_review_when:
   - "The prompt catalog is out of sync with the actual prompt files"
 related_docs:
-  - "docs/plans/2026-04-04-basb-codex-workflow.md"
+  - ".basb/plans/2026-04-04-basb-codex-workflow.md"
   - "README.md"
 tags:
   - "basb"

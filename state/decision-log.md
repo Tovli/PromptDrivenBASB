@@ -2,7 +2,7 @@
 title: "Decision Log"
 type: "state"
 status: "active"
-updated_at: "2026-04-05T15:57:46.2377284+03:00"
+updated_at: "2026-04-05T16:04:15.9555516+03:00"
 tags:
   - "basb"
   - "decision-log"
@@ -13,7 +13,7 @@ related_docs:
 # Log
 
 - `2026-04-05T09:37:10.4841057+03:00` | bootstrap | Created the vault, state files, prompt pack, templates, examples, and BASB operating docs. | confidence: `0.96` | review_required: `false`
-- `2026-04-05T09:47:37.9783214+03:00` | verification | Verified required files, frontmatter coverage, and routing JSON validity. Fixed missing frontmatter in `docs/prompts/README.md`. | confidence: `0.99` | review_required: `false`
+- `2026-04-05T09:47:37.9783214+03:00` | verification | Verified required files, frontmatter coverage, and routing JSON validity. Fixed missing frontmatter in `.basb/prompts/README.md`. | confidence: `0.99` | review_required: `false`
 - `2026-04-05T11:55:51.0493719+03:00` | capture | Captured a new inbox note for the ShopLink admin idea to edit notification scheduling after RRULE DSL implementation. No routing performed. | confidence: `0.93` | review_required: `false`
 - `2026-04-05T11:58:42.0722547+03:00` | agent-instructions | Added `AGENTS.md` as the root startup guide for new BASB sessions, including startup order, routing rules, frontmatter policy, and close-out requirements. | confidence: `0.98` | review_required: `false`
 - `2026-04-05T12:52:21.1751743+03:00` | npm-package | Added a publishable npm package surface for the BASB workspace with `package.json`, a small asset-path API, Node tests, and npm tarball verification. | confidence: `0.97` | review_required: `false`
@@ -28,4 +28,5 @@ related_docs:
 - `2026-04-05T14:37:22.8947414+03:00` | npm-install-refresh-policy | Refined the install scaffold so package-owned workspace files are refreshed from the installed package version on reinstall or upgrade, while `state/` remains missing-only. Verified with focused tests, full test suite, tarball preview, and a temp-directory postinstall check showing package files overwritten and `state/MEMORY.md` preserved. | confidence: `0.99` | review_required: `false`
 - `2026-04-05T15:00:57.0720244+03:00` | prompt-intake-hardening | Strengthened BASB startup, soul, and master/capture prompts so new user prompts default to second-brain intake, are classified through capture plus routing, and are documented in-session unless the request is clearly BASB-system maintenance or transient conversation. | confidence: `0.97` | review_required: `false`
 - `2026-04-05T15:08:23.1163396+03:00` | prompt-intake-regression-test | Added a scaffold-level regression test that verifies packaged BASB instructions treat new prompts as second-brain intake, and updated bootstrap `state/SOUL.md` so fresh installs inherit the same rule. | confidence: `0.98` | review_required: `false`
-- `2026-04-05T15:57:46.2377284+03:00` | npm-install-readme-and-docs-scope | Split the scaffolded workspace README from the package README by adding `bootstrap/README.md`, updated the install scaffold to copy only `docs/prompts`, and added regression tests to keep package-publishing details and `docs/plans/` content out of installed BASB workspaces. | confidence: `0.99` | review_required: `false`
+- `2026-04-05T15:57:46.2377284+03:00` | npm-install-readme-and-docs-scope | Split the scaffolded workspace README from the package README by adding `bootstrap/README.md`, updated the install scaffold to copy only `.basb/prompts`, and added regression tests to keep package-publishing details and `.basb/plans/` content out of installed BASB workspaces. | confidence: `0.99` | review_required: `false`
+- `2026-04-05T16:04:15.9555516+03:00` | basb-hidden-folder-convention | Moved repository-owned BASB prompts and plans from `docs/` to `.basb/`, updated package asset paths and install scaffold behavior to materialize `.basb/prompts`, refreshed repo and bootstrap instructions, and verified the package/scaffold tests against the new hidden-folder convention. | confidence: `0.99` | review_required: `false`

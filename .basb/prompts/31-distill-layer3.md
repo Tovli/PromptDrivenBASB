@@ -9,8 +9,8 @@ outputs:
 requires_review_when:
   - "Layer 2 does not provide a coherent enough base to compress further"
 related_docs:
-  - "docs/prompts/30-distill-layer2.md"
-  - "docs/prompts/32-distill-layer4.md"
+  - ".basb/prompts/30-distill-layer2.md"
+  - ".basb/prompts/32-distill-layer4.md"
 tags:
   - "basb"
   - "prompt"

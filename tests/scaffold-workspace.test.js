@@ -21,12 +21,12 @@ test('scaffolds BASB workspace files into the target root and initializes bootst
 
   assert.equal(fs.existsSync(path.join(targetRoot, 'AGENTS.md')), true);
   assert.equal(fs.existsSync(path.join(targetRoot, 'BASBGuide.md')), true);
-  assert.equal(fs.existsSync(path.join(targetRoot, 'docs', 'prompts', '00-master-system.md')), true);
+  assert.equal(fs.existsSync(path.join(targetRoot, '.basb', 'prompts', '00-master-system.md')), true);
   assert.equal(fs.existsSync(path.join(targetRoot, 'templates', 'project-note.md')), true);
   assert.equal(fs.existsSync(path.join(targetRoot, 'vault', 'inbox', '.gitkeep')), true);
   assert.equal(fs.existsSync(path.join(targetRoot, 'state', 'SOUL.md')), true);
   assert.equal(fs.existsSync(path.join(targetRoot, 'state', 'decision-log.md')), true);
-  assert.equal(fs.existsSync(path.join(targetRoot, 'docs', 'plans')), false);
+  assert.equal(fs.existsSync(path.join(targetRoot, '.basb', 'plans')), false);
 
   const decisionLog = fs.readFileSync(
     path.join(targetRoot, 'state', 'decision-log.md'),
@@ -49,11 +49,11 @@ test('scaffolded workspace instructions treat new prompts as second-brain intake
   const agents = fs.readFileSync(path.join(targetRoot, 'AGENTS.md'), 'utf8');
   const soul = fs.readFileSync(path.join(targetRoot, 'state', 'SOUL.md'), 'utf8');
   const masterPrompt = fs.readFileSync(
-    path.join(targetRoot, 'docs', 'prompts', '00-master-system.md'),
+    path.join(targetRoot, '.basb', 'prompts', '00-master-system.md'),
     'utf8',
   );
   const capturePrompt = fs.readFileSync(
-    path.join(targetRoot, 'docs', 'prompts', '10-capture.md'),
+    path.join(targetRoot, '.basb', 'prompts', '10-capture.md'),
     'utf8',
   );
 
@@ -76,7 +76,7 @@ test('scaffolded README stays BASB-focused and omits package-publishing details'
 
   assert.doesNotMatch(readme, /^## NPM Package$/m);
   assert.doesNotMatch(readme, /prompt-driven-basb/);
-  assert.doesNotMatch(readme, /docs\/plans\//);
+  assert.doesNotMatch(readme, /\.basb\/plans\//);
 });
 
 test('overwrites packaged workspace files but preserves existing local state on install or upgrade', () => {
@@ -85,7 +85,7 @@ test('overwrites packaged workspace files but preserves existing local state on 
   const existingReadmePath = path.join(targetRoot, 'README.md');
   const existingPromptPath = path.join(
     targetRoot,
-    'docs',
+    '.basb',
     'prompts',
     '00-master-system.md',
   );
@@ -108,9 +108,9 @@ test('overwrites packaged workspace files but preserves existing local state on 
     'utf8',
   ));
   assert.equal(fs.readFileSync(existingPromptPath, 'utf8'), fs.readFileSync(
-    path.join(__dirname, '..', 'docs', 'prompts', '00-master-system.md'),
+    path.join(__dirname, '..', '.basb', 'prompts', '00-master-system.md'),
     'utf8',
   ));
   assert.equal(fs.existsSync(path.join(targetRoot, 'state', 'SOUL.md')), true);
-  assert.equal(fs.existsSync(path.join(targetRoot, 'docs', 'prompts', '10-capture.md')), true);
+  assert.equal(fs.existsSync(path.join(targetRoot, '.basb', 'prompts', '10-capture.md')), true);
 });
