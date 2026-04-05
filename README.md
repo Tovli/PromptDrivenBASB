@@ -21,6 +21,25 @@ Codex is the BASB engine.
 - Markdown files hold both content and metadata.
 - Frontmatter keeps the files readable while staying structured.
 
+## NPM Package
+
+This repository can now be published as the `prompt-driven-basb` npm package.
+
+It ships the BASB workspace files as package assets and exposes a small Node API for resolving bundled paths:
+
+```js
+const { assets, getAssetPath, listPromptFiles } = require('prompt-driven-basb');
+
+console.log(assets.masterPrompt);
+console.log(getAssetPath('templates/project-note.md'));
+console.log(listPromptFiles());
+```
+
+Local verification commands:
+
+- `npm test`
+- `npm run pack:check`
+
 ## Session Start
 
 For a normal BASB session, read these in order:

@@ -1,0 +1,43 @@
+{
+  "name": "prompt-driven-basb",
+  "version": "0.1.0",
+  "description": "Prompt-driven Building a Second Brain workspace packaged for npm.",
+  "keywords": [
+    "basb",
+    "second-brain",
+    "prompts",
+    "markdown",
+    "knowledge-management"
+  ],
+  "license": "UNLICENSED",
+  "type": "commonjs",
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./index.d.ts",
+      "require": "./index.js",
+      "default": "./index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "AGENTS.md",
+    "BASBGuide.md",
+    "README.md",
+    "docs",
+    "examples",
+    "state",
+    "templates",
+    "vault",
+    "index.js",
+    "index.d.ts"
+  ],
+  "scripts": {
+    "test": "node --test tests/package.test.js",
+    "pack:check": "npm pack --dry-run"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}
