@@ -1,7 +1,8 @@
 ---
 title: "BASB Session Start"
-purpose: "Start any BASB session consistently and with the minimum viable context."
+purpose: "Start any BASB session consistently, classify the incoming prompt, and gather only the minimum viable context."
 stage: "maintain"
+updated_at: "2026-04-05T15:00:57.0720244+03:00"
 inputs:
   - "state/SOUL.md"
   - "state/MEMORY.md"
@@ -25,6 +26,13 @@ tags:
 3. Read `state/MEMORY.md`.
 4. Read `state/active-context.md`.
 5. Read the task-specific prompt.
+6. Classify the incoming user prompt as one of: new capture, work on an existing note, BASB system maintenance, or transient conversation.
+
+# Prompt Intake Default
+
+- Unless the user clearly points to an existing note or requests BASB-system maintenance, treat the current prompt as potential second-brain material.
+- If the prompt introduces net-new durable information, run `docs/prompts/10-capture.md` first and route it in the same session when confidence permits.
+- Do not leave durable prompt content only in conversation history when it should be persisted as a BASB note or review item.
 
 # Before Editing
 
@@ -33,6 +41,7 @@ Produce a short pre-edit summary with:
 - the task you think you are performing
 - the files you expect to read
 - the files you expect to modify
+- whether the current prompt itself needs capture, routing, or review
 - any ambiguity that could force review
 
 # Context Hygiene

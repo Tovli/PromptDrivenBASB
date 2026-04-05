@@ -36,6 +36,32 @@ test('scaffolds BASB workspace files into the target root and initializes bootst
   assert.doesNotMatch(decisionLog, /github-actions-auto-versioning/);
 });
 
+test('scaffolded workspace instructions treat new prompts as second-brain intake', () => {
+  const targetRoot = createTempDir();
+
+  scaffoldWorkspace({
+    packageRoot: path.join(__dirname, '..'),
+    targetRoot,
+    timestamp: '2026-04-05T15:00:00.000Z',
+  });
+
+  const agents = fs.readFileSync(path.join(targetRoot, 'AGENTS.md'), 'utf8');
+  const soul = fs.readFileSync(path.join(targetRoot, 'state', 'SOUL.md'), 'utf8');
+  const masterPrompt = fs.readFileSync(
+    path.join(targetRoot, 'docs', 'prompts', '00-master-system.md'),
+    'utf8',
+  );
+  const capturePrompt = fs.readFileSync(
+    path.join(targetRoot, 'docs', 'prompts', '10-capture.md'),
+    'utf8',
+  );
+
+  assert.match(agents, /new user prompt as incoming second-brain material/i);
+  assert.match(soul, /new user prompt as potential second-brain material/i);
+  assert.match(masterPrompt, /new user prompt as a candidate addition to the user's second brain/i);
+  assert.match(capturePrompt, /new user prompt as source material/i);
+});
+
 test('overwrites packaged workspace files but preserves existing local state on install or upgrade', () => {
   const targetRoot = createTempDir();
   const existingStatePath = path.join(targetRoot, 'state', 'MEMORY.md');

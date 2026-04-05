@@ -2,7 +2,7 @@
 title: "BASB Agent Instructions"
 type: "state"
 status: "active"
-updated_at: "2026-04-05T11:58:42.0722547+03:00"
+updated_at: "2026-04-05T15:00:57.0720244+03:00"
 tags:
   - "basb"
   - "agent"
@@ -37,10 +37,11 @@ If the task is specific to an existing note, read that note after scanning its f
 2. Preserve source material. Distillation adds layers and summaries; it does not replace the original content.
 3. Prefer frontmatter for metadata and the markdown body for substance.
 4. Route by next intended use and actionability, not by topic alone.
-5. If routing is involved, produce the JSON routing decision before moving the note.
-6. If confidence is below `0.80`, prefer `state/review-queue.md` over guessing.
-7. After any state-changing session, append a concise entry to `state/decision-log.md`.
-8. Keep the system local-first and file-based. Do not introduce services, databases, schedulers, or hidden state unless the user explicitly asks for that change.
+5. Treat each new user prompt as incoming second-brain material by default. If it introduces net-new durable information, capture, classify, and document it in the same session unless the user clearly asked for BASB system maintenance or transient conversation.
+6. If routing is involved, produce the JSON routing decision before moving the note.
+7. If confidence is below `0.80`, prefer `state/review-queue.md` over guessing.
+8. After any state-changing session, append a concise entry to `state/decision-log.md`.
+9. Keep the system local-first and file-based. Do not introduce services, databases, schedulers, or hidden state unless the user explicitly asks for that change.
 
 # Frontmatter Policy
 
@@ -74,6 +75,7 @@ Use vault-relative paths in `related_docs`.
 
 Use the smallest prompt that fits the task:
 
+- new prompt intake or ad hoc idea capture: `docs/prompts/10-capture.md` then `docs/prompts/20-organize-route.md`
 - capture: `docs/prompts/10-capture.md`
 - route: `docs/prompts/20-organize-route.md`
 - ambiguous routing: `docs/prompts/21-human-review.md`
@@ -100,12 +102,13 @@ Before moving a note across P.A.R.A. boundaries, produce:
 
 # Operating Pattern
 
-1. Read the minimum relevant context.
-2. Scan frontmatter before full note bodies.
-3. Make the smallest useful change.
-4. Update frontmatter if the note materially changed.
-5. Log the action in `state/decision-log.md`.
-6. If ambiguity remains, queue it in `state/review-queue.md`.
+1. Classify the current user prompt first: new capture, existing-note work, BASB system maintenance, or transient conversation.
+2. Read the minimum relevant context.
+3. Scan frontmatter before full note bodies.
+4. Make the smallest useful change.
+5. Update frontmatter if the note materially changed.
+6. Log the action in `state/decision-log.md`.
+7. If ambiguity remains, queue it in `state/review-queue.md`.
 
 # Session Close
 
