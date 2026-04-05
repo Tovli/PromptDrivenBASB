@@ -25,7 +25,9 @@ Codex is the BASB engine.
 
 This repository can now be published as the `prompt-driven-basb` npm package.
 
-It ships the BASB workspace files as package assets and exposes a small Node API for resolving bundled paths:
+Running `npm install prompt-driven-basb` scaffolds the BASB workspace into the current project root. On first install it creates the bundled prompts, templates, examples, vault directories, and a bootstrap `state/` folder. On later installs and upgrades it refreshes the package-owned workspace files from the current package version, while `state/` only fills in missing files and preserves the user's local BASB state.
+
+The package also exposes a small Node API for resolving bundled paths:
 
 ```js
 const { assets, getAssetPath, listPromptFiles } = require('prompt-driven-basb');
@@ -34,6 +36,10 @@ console.log(assets.masterPrompt);
 console.log(getAssetPath('templates/project-note.md'));
 console.log(listPromptFiles());
 ```
+
+The published package intentionally does not bundle `state/`. Client-local BASB memory, review queues, and decision logs should remain outside package upgrades so they are not overwritten when the package updates.
+
+The install-time `state/` folder is initialized from neutral bootstrap templates, not from this repository's live maintainer state.
 
 Local verification commands:
 

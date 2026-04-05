@@ -34,17 +34,20 @@
     "BASBGuide.md",
     "LICENSE",
     "README.md",
+    "bootstrap",
     "docs",
     "examples",
-    "state",
+    "scripts/postinstall.cjs",
+    "scripts/lib/scaffold-workspace.cjs",
     "templates",
     "vault",
     "index.js",
     "index.d.ts"
   ],
   "scripts": {
-    "test": "node --test tests/package.test.js tests/publish-version.test.js",
+    "test": "node --test tests/package.test.js tests/scaffold-workspace.test.js tests/publish-version.test.js",
     "pack:check": "npm pack --dry-run",
+    "postinstall": "node scripts/postinstall.cjs",
     "prepare:publish-version": "node scripts/prepare-publish-version.cjs"
   },
   "engines": {

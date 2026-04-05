@@ -1,5 +1,6 @@
 const test = require('node:test');
 const assert = require('node:assert/strict');
+const { execSync } = require('node:child_process');
 const fs = require('node:fs');
 const path = require('node:path');
 
@@ -31,6 +32,7 @@ test('exposes named asset shortcuts for common workspace files', () => {
   assert.equal(assets.readme, path.join(packageRoot, 'README.md'));
   assert.equal(assets.agents, path.join(packageRoot, 'AGENTS.md'));
   assert.equal(assets.masterPrompt, path.join(packageRoot, 'docs', 'prompts', '00-master-system.md'));
+  assert.equal(fs.existsSync(assets.stateDir), true);
   assert.equal(fs.existsSync(assets.masterPrompt), true);
 });
 
@@ -40,4 +42,29 @@ test('lists prompt markdown files from the packaged prompt directory', () => {
   assert.equal(Array.isArray(prompts), true);
   assert.equal(prompts.includes('00-master-system.md'), true);
   assert.equal(prompts.includes('20-organize-route.md'), true);
+});
+
+test('npm tarball excludes client-local state files', () => {
+  const packedFilesOutput = execSync('npm pack --json --dry-run', {
+    cwd: packageRoot,
+    encoding: 'utf8',
+  });
+  const [{ files: packedFiles }] = JSON.parse(packedFilesOutput);
+  const packedFilePaths = packedFiles.map((file) => file.path);
+
+  assert.equal(
+    packedFilePaths.some((filePath) => filePath === 'state' || filePath.startsWith('state/')),
+    false,
+  );
+  assert.equal(packedFilePaths.includes('bootstrap/state/SOUL.md'), true);
+  assert.equal(packedFilePaths.includes('docs/prompts/00-master-system.md'), true);
+  assert.equal(packedFilePaths.includes('scripts/postinstall.cjs'), true);
+});
+
+test('package manifest scaffolds the BASB workspace on install', () => {
+  const manifest = JSON.parse(
+    fs.readFileSync(path.join(packageRoot, 'package.json'), 'utf8'),
+  );
+
+  assert.equal(manifest.scripts.postinstall, 'node scripts/postinstall.cjs');
 });

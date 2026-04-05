@@ -9,7 +9,7 @@ const namedAssetPaths = Object.freeze({
   readme: 'README.md',
   promptsDir: path.join('docs', 'prompts'),
   templatesDir: 'templates',
-  stateDir: 'state',
+  stateDir: path.join('bootstrap', 'state'),
   vaultDir: 'vault',
   masterPrompt: path.join('docs', 'prompts', '00-master-system.md'),
   capturePrompt: path.join('docs', 'prompts', '10-capture.md'),

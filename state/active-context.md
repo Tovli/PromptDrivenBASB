@@ -2,7 +2,7 @@
 title: "Active Context"
 type: "state"
 status: "active"
-updated_at: "2026-04-05T14:02:03.6040204+03:00"
+updated_at: "2026-04-05T14:37:22.8947414+03:00"
 tags:
   - "basb"
   - "active-context"
@@ -12,7 +12,7 @@ related_docs:
 ---
 # Current Focus
 
-`prompt-driven-basb` now derives its npm publish version automatically on each push to `main`, but only when the current commit has not already been published. The workflow compares the latest npm package `gitHead` to the current commit SHA, skips duplicate reruns for the same code, and only bumps the patch version when a new commit needs a fresh publish.
+`prompt-driven-basb` now scaffolds the BASB workspace into the consumer project root during `npm install` via a `postinstall` hook. Package-owned files such as `AGENTS.md`, `BASBGuide.md`, `README.md`, `docs/`, `examples/`, `templates/`, and packaged vault placeholders refresh from the installed package version on upgrade, while `state/` still initializes from neutral bootstrap templates only when those files are missing.
 
 # Current Boundaries
 
@@ -22,15 +22,22 @@ related_docs:
 
 # Recommended Next Actions
 
-1. Create an npm automation token and save it as the GitHub repository secret `NPM_TOKEN` for `Tovli/PromptDrivenBASB`.
-2. Push or merge the workflow and version-prep helper changes to `main` so the next `main` push can publish `prompt-driven-basb@0.1.1`.
-3. After the workflow runs, verify `npm.cmd view prompt-driven-basb version gitHead dist-tags --json` shows `latest: 0.1.1`, then rerun the workflow for the same commit to confirm it skips publishing instead of bumping a duplicate version.
+1. Push or merge the install-scaffold, bootstrap-state, and package whitelist changes to `main`.
+2. Publish the next package version, then verify a clean consumer project gets `docs/`, `examples/`, `templates/`, `vault/`, and `state/` at its root immediately after `npm install prompt-driven-basb`.
+3. Re-run the install into a workspace that already has customized package-owned markdown and `state/` files to confirm package content refreshes while `state/` remains untouched.
 
 # Recently Touched
 
+- `bootstrap/state/SOUL.md`
 - `docs/plans/2026-04-05-auto-versioning.md`
 - `.github/workflows/publish-npm.yml`
+- `index.js`
 - `package.json`
+- `README.md`
+- `scripts/lib/scaffold-workspace.cjs`
+- `scripts/postinstall.cjs`
 - `scripts/lib/publish-version.cjs`
 - `scripts/prepare-publish-version.cjs`
+- `tests/package.test.js`
+- `tests/scaffold-workspace.test.js`
 - `state/decision-log.md`

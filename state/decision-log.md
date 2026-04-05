@@ -2,7 +2,7 @@
 title: "Decision Log"
 type: "state"
 status: "active"
-updated_at: "2026-04-05T14:02:03.6040204+03:00"
+updated_at: "2026-04-05T14:37:22.8947414+03:00"
 tags:
   - "basb"
   - "decision-log"
@@ -23,3 +23,6 @@ related_docs:
 - `2026-04-05T13:21:22.2428664+03:00` | github-actions-publish | Added a GitHub Actions workflow that verifies the package, skips versions already published to npm, and publishes on pushes to `main` with provenance using the `NPM_TOKEN` repository secret. Added repository metadata so npm provenance links back to GitHub. | confidence: `0.98` | review_required: `false`
 - `2026-04-05T13:51:09.1023415+03:00` | github-actions-auto-versioning | Added a tested publish-version helper and workflow preparation step so each `main` push derives a publishable npm version automatically. The workflow keeps an unpublished manifest version as-is, otherwise bumps the next patch version above npm's latest published release. | confidence: `0.98` | review_required: `false`
 - `2026-04-05T14:02:03.6040204+03:00` | github-actions-githead-guard | Refined npm publish automation to compare the latest published package `gitHead` with the current commit SHA. Workflow reruns for the same commit now skip publishing entirely, while new commits still publish the manifest version or the next patch version as needed. | confidence: `0.99` | review_required: `false`
+- `2026-04-05T14:16:13.2134354+03:00` | npm-package-state-exclusion | Removed `state/` from the npm package whitelist, added a tarball regression test to keep client-local BASB state out of published upgrades, and updated package documentation to state that `state/` is intentionally not bundled. | confidence: `0.99` | review_required: `false`
+- `2026-04-05T14:30:08.1667273+03:00` | npm-install-scaffold | Added a non-destructive npm `postinstall` scaffold that materializes the BASB workspace into the consumer project root, ships neutral bootstrap `state/` templates inside `bootstrap/state/`, and preserves existing user files on reinstall or upgrade. Verified with tests, tarball preview, and a fresh temp-directory postinstall run. | confidence: `0.99` | review_required: `false`
+- `2026-04-05T14:37:22.8947414+03:00` | npm-install-refresh-policy | Refined the install scaffold so package-owned workspace files are refreshed from the installed package version on reinstall or upgrade, while `state/` remains missing-only. Verified with focused tests, full test suite, tarball preview, and a temp-directory postinstall check showing package files overwritten and `state/MEMORY.md` preserved. | confidence: `0.99` | review_required: `false`
