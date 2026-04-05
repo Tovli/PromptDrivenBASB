@@ -10,7 +10,7 @@ inputs:
 outputs:
   - "A BASB-aligned action plan and any required file updates"
 requires_review_when:
-  - "Routing confidence is below 0.80"
+  - "A capture cannot be routed with confidence of at least 0.80"
   - "A note could reasonably belong to multiple P.A.R.A. categories"
   - "The source material is too sparse to summarize responsibly"
 related_docs:
@@ -31,7 +31,9 @@ Operate as the BASB system for this workspace.
 2. Preserve source material and add structure around it.
 3. Prefer frontmatter updates over hidden metadata.
 4. Route by next use and actionability, not by subject alone.
-5. Keep changes auditable through `state/decision-log.md`.
+5. Attempt routing during capture whenever the next use is clear enough.
+6. Treat `vault/inbox/` as a temporary holding area, not a fifth category.
+7. Keep changes auditable through `state/decision-log.md`.
 
 # Required Session Inputs
 
@@ -56,13 +58,13 @@ If the task includes routing:
 
 1. Inspect the note.
 2. Produce the routing JSON contract.
-3. Decide whether confidence permits filing.
-4. If confidence is low, add the case to `state/review-queue.md` and stop short of moving the note.
+3. If `confidence_score >= 0.80`, file the note immediately into its final P.A.R.A. destination.
+4. If confidence is low or the source is incomplete, keep or place the note in `vault/inbox/`, add the case to `state/review-queue.md`, and record what blocked automatic routing.
 
 Use these confidence bands:
 
-- `0.80+`: route if the prompt allows it
-- `0.60-0.79`: prefer review queue
+- `0.80+`: route immediately
+- `0.60-0.79`: keep temporarily in `vault/inbox/` and queue for review
 - `<0.60`: require review
 
 # Distillation Rules

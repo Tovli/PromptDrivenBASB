@@ -34,8 +34,8 @@ Each prompt in this directory is meant to be combined with:
 
 ## Workflow Prompts
 
-- `10-capture.md`: normalize raw material into an inbox note
-- `20-organize-route.md`: route notes into P.A.R.A.
+- `10-capture.md`: normalize raw material and route it immediately when possible
+- `20-organize-route.md`: route notes from temporary holding into final P.A.R.A.
 - `21-human-review.md`: escalate ambiguity safely
 - `30-distill-layer2.md`: bold key concepts
 - `31-distill-layer3.md`: highlight the fastest reading path
@@ -59,6 +59,7 @@ Before trusting a prompt, check that it:
 
 1. Read the core state files.
 2. Read `00-master-system.md`.
-3. Read one workflow prompt.
-4. Read the minimum relevant note set.
-5. Apply the prompt and update logs.
+3. Use `10-capture.md` to normalize and immediately route new material when confidence allows.
+4. Use `20-organize-route.md` only for temporary inbox items or other unfiled notes.
+5. Read the minimum relevant note set.
+6. Apply the prompt and update logs.

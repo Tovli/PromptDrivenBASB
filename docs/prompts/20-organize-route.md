@@ -29,6 +29,7 @@ Decide where a note belongs in P.A.R.A. based on the user's likely next use.
 - Area: ongoing responsibility without a natural finish line.
 - Resource: useful reference not tied to active execution.
 - Archive: inactive or completed material.
+- Inbox is not a P.A.R.A. category. It is only a temporary holding area for notes that cannot yet be routed safely.
 
 Never create a fifth category.
 
@@ -50,7 +51,9 @@ Before moving a note, output this JSON:
 # Auto-Route Threshold
 
 - If `confidence_score >= 0.80` and the justification is clear, move the note.
-- Otherwise append a case to `state/review-queue.md` and do not move it.
+- Otherwise keep the note in `vault/inbox/`, append a case to `state/review-queue.md`, and do not move it into a final P.A.R.A. folder yet.
+
+Even when review is required, keep the JSON classification limited to `projects`, `areas`, `resources`, or `archives`. The temporary inbox location does not change the proposed final category.
 
 # After Routing
 
@@ -61,6 +64,13 @@ If the note is moved:
 3. Update `updated_at`.
 4. Fill `route_reason`.
 5. Refresh `tags`, `related_docs`, and `linked_projects` if needed.
+
+If the note is not moved:
+
+1. Keep `type: inbox`.
+2. Keep `status: review`.
+3. Preserve the proposed P.A.R.A. classification in the review queue entry.
+4. Record the missing evidence or ambiguity that blocked automatic routing.
 
 # Naming Rule
 

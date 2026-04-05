@@ -2,7 +2,7 @@
 title: "Active Context"
 type: "state"
 status: "active"
-updated_at: "2026-04-05T11:55:51.0493719+03:00"
+updated_at: "2026-04-05T12:17:39.4631425+03:00"
 tags:
   - "basb"
   - "active-context"
@@ -12,7 +12,7 @@ related_docs:
 ---
 # Current Focus
 
-The first live BASB capture has been stored in `vault/inbox/shoplink-admin-edit-notification-scheduling.md`. The next likely step is routing it once its intended use is clearer.
+The workspace has been reset from the previous live capture. The next likely step is a fresh note capture through `docs/prompts/10-capture.md`.
 
 # Current Boundaries
 
@@ -22,15 +22,11 @@ The first live BASB capture has been stored in `vault/inbox/shoplink-admin-edit-
 
 # Recommended Next Actions
 
-1. Route `vault/inbox/shoplink-admin-edit-notification-scheduling.md` when you want it classified.
-2. Add more real captures through `docs/prompts/10-capture.md`.
+1. Create a new capture through `docs/prompts/10-capture.md`.
+2. Route the new note only after its intended use is clear.
 3. Use the distillation prompts only after notes have stable homes.
-4. Link future RRULE DSL notes back to this capture.
 
 # Recently Touched
 
 - `state/`
-- `docs/prompts/`
-- `templates/`
-- `examples/`
-- `vault/inbox/shoplink-admin-edit-notification-scheduling.md`
+- `vault/inbox/`

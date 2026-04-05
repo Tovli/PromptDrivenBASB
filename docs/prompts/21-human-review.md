@@ -26,7 +26,8 @@ Escalate ambiguity without creating vault damage.
 2. Summarize the ambiguity in one short paragraph.
 3. Present two or three plausible options.
 4. State the preferred option and why.
-5. Record the case in `state/review-queue.md`.
+5. Keep the note in `vault/inbox/` as a temporary holding item until clarified.
+6. Record the case in `state/review-queue.md`.
 
 # Clarification Format
 
@@ -48,6 +49,8 @@ Add a queue entry with:
 
 - timestamp
 - note path
+- proposed P.A.R.A. classification when known
+- proposed destination path when known
 - ambiguity reason
 - options
 - preferred action
