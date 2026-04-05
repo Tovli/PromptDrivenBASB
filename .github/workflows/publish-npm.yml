@@ -1,0 +1,57 @@
+name: Publish npm package
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+concurrency:
+  group: publish-npm-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v5
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          registry-url: https://registry.npmjs.org
+
+      - name: Install dependencies
+        shell: bash
+        run: |
+          if [ -f package-lock.json ] || [ -f npm-shrinkwrap.json ]; then
+            npm ci
+          else
+            npm install --no-package-lock
+          fi
+
+      - name: Prepare publish version
+        id: version
+        run: npm run prepare:publish-version
+
+      - name: Run tests
+        run: npm test
+
+      - name: Verify publish tarball
+        run: npm run pack:check
+
+      - name: Report skipped publish
+        if: steps.version.outputs.should_publish != 'true'
+        run: echo "Skipping npm publish because ${{ steps.version.outputs.publish_reason }}"
+
+      - name: Publish package to npm
+        if: steps.version.outputs.should_publish == 'true'
+        run: npm publish --access public --provenance
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

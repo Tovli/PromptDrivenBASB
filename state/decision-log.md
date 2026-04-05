@@ -2,7 +2,7 @@
 title: "Decision Log"
 type: "state"
 status: "active"
-updated_at: "2026-04-05T13:14:42.3977827+03:00"
+updated_at: "2026-04-05T14:02:03.6040204+03:00"
 tags:
   - "basb"
   - "decision-log"
@@ -20,3 +20,6 @@ related_docs:
 - `2026-04-05T13:03:51.6244643+03:00` | npm-publish-attempt | Verified npm auth, package tests, and publish tarball, then attempted `npm.cmd publish --access public`. npm rejected the publish with `E403` because 2FA or a granular access token with bypass is required. | confidence: `0.99` | review_required: `false`
 - `2026-04-05T13:10:52.6376896+03:00` | npm-published | Verified from the npm registry that `prompt-driven-basb@0.1.0` exists and that `latest` points to `0.1.0` after the user completed the publish in a separate terminal command. | confidence: `0.99` | review_required: `false`
 - `2026-04-05T13:14:42.3977827+03:00` | npm-license-patch | Updated the package to MIT licensing, added a `LICENSE` file, bumped the package to `0.1.1`, verified tests and tarball contents, and attempted publish. npm rejected the publish with `EOTP`, so a current one-time password is still required. | confidence: `0.99` | review_required: `false`
+- `2026-04-05T13:21:22.2428664+03:00` | github-actions-publish | Added a GitHub Actions workflow that verifies the package, skips versions already published to npm, and publishes on pushes to `main` with provenance using the `NPM_TOKEN` repository secret. Added repository metadata so npm provenance links back to GitHub. | confidence: `0.98` | review_required: `false`
+- `2026-04-05T13:51:09.1023415+03:00` | github-actions-auto-versioning | Added a tested publish-version helper and workflow preparation step so each `main` push derives a publishable npm version automatically. The workflow keeps an unpublished manifest version as-is, otherwise bumps the next patch version above npm's latest published release. | confidence: `0.98` | review_required: `false`
+- `2026-04-05T14:02:03.6040204+03:00` | github-actions-githead-guard | Refined npm publish automation to compare the latest published package `gitHead` with the current commit SHA. Workflow reruns for the same commit now skip publishing entirely, while new commits still publish the manifest version or the next patch version as needed. | confidence: `0.99` | review_required: `false`

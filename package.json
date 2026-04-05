@@ -9,6 +9,14 @@
     "markdown",
     "knowledge-management"
   ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Tovli/PromptDrivenBASB.git"
+  },
+  "homepage": "https://github.com/Tovli/PromptDrivenBASB#readme",
+  "bugs": {
+    "url": "https://github.com/Tovli/PromptDrivenBASB/issues"
+  },
   "license": "MIT",
   "type": "commonjs",
   "main": "./index.js",
@@ -35,8 +43,9 @@
     "index.d.ts"
   ],
   "scripts": {
-    "test": "node --test tests/package.test.js",
-    "pack:check": "npm pack --dry-run"
+    "test": "node --test tests/package.test.js tests/publish-version.test.js",
+    "pack:check": "npm pack --dry-run",
+    "prepare:publish-version": "node scripts/prepare-publish-version.cjs"
   },
   "engines": {
     "node": ">=22"
