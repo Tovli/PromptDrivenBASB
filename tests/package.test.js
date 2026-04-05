@@ -56,6 +56,10 @@ test('npm tarball excludes client-local state files', () => {
     packedFilePaths.some((filePath) => filePath === 'state' || filePath.startsWith('state/')),
     false,
   );
+  assert.equal(
+    packedFilePaths.some((filePath) => filePath === 'docs/plans' || filePath.startsWith('docs/plans/')),
+    false,
+  );
   assert.equal(packedFilePaths.includes('bootstrap/state/SOUL.md'), true);
   assert.equal(packedFilePaths.includes('docs/prompts/00-master-system.md'), true);
   assert.equal(packedFilePaths.includes('scripts/postinstall.cjs'), true);

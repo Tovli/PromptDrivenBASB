@@ -35,7 +35,7 @@
     "LICENSE",
     "README.md",
     "bootstrap",
-    "docs",
+    "docs/prompts",
     "examples",
     "scripts/postinstall.cjs",
     "scripts/lib/scaffold-workspace.cjs",

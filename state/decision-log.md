@@ -2,7 +2,7 @@
 title: "Decision Log"
 type: "state"
 status: "active"
-updated_at: "2026-04-05T15:08:23.1163396+03:00"
+updated_at: "2026-04-05T15:57:46.2377284+03:00"
 tags:
   - "basb"
   - "decision-log"
@@ -28,3 +28,4 @@ related_docs:
 - `2026-04-05T14:37:22.8947414+03:00` | npm-install-refresh-policy | Refined the install scaffold so package-owned workspace files are refreshed from the installed package version on reinstall or upgrade, while `state/` remains missing-only. Verified with focused tests, full test suite, tarball preview, and a temp-directory postinstall check showing package files overwritten and `state/MEMORY.md` preserved. | confidence: `0.99` | review_required: `false`
 - `2026-04-05T15:00:57.0720244+03:00` | prompt-intake-hardening | Strengthened BASB startup, soul, and master/capture prompts so new user prompts default to second-brain intake, are classified through capture plus routing, and are documented in-session unless the request is clearly BASB-system maintenance or transient conversation. | confidence: `0.97` | review_required: `false`
 - `2026-04-05T15:08:23.1163396+03:00` | prompt-intake-regression-test | Added a scaffold-level regression test that verifies packaged BASB instructions treat new prompts as second-brain intake, and updated bootstrap `state/SOUL.md` so fresh installs inherit the same rule. | confidence: `0.98` | review_required: `false`
+- `2026-04-05T15:57:46.2377284+03:00` | npm-install-readme-and-docs-scope | Split the scaffolded workspace README from the package README by adding `bootstrap/README.md`, updated the install scaffold to copy only `docs/prompts`, and added regression tests to keep package-publishing details and `docs/plans/` content out of installed BASB workspaces. | confidence: `0.99` | review_required: `false`

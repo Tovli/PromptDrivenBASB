@@ -2,19 +2,19 @@
 title: "Active Context"
 type: "state"
 status: "active"
-updated_at: "2026-04-05T15:00:57.0720244+03:00"
+updated_at: "2026-04-05T15:57:46.2377284+03:00"
 tags:
   - "basb"
   - "active-context"
 related_docs:
   - "state/MEMORY.md"
-  - "docs/prompts/01-session-start.md"
-  - "docs/prompts/00-master-system.md"
-  - "docs/prompts/10-capture.md"
+  - "package.json"
+  - "bootstrap/README.md"
+  - "scripts/lib/scaffold-workspace.cjs"
 ---
 # Current Focus
 
-The current BASB refinement focus is prompt-intake behavior. New user prompts should be treated as additions to the user's second brain by default, routed through capture plus classification, and documented in the same session unless the request is clearly BASB-system maintenance or transient conversation.
+The current BASB refinement focus is npm-install scaffold hygiene. Packaged installs should materialize a BASB-focused workspace README and prompt set without shipping maintainer-only plan docs or package-publishing details into the user's workspace.
 
 # Current Boundaries
 
@@ -24,15 +24,15 @@ The current BASB refinement focus is prompt-intake behavior. New user prompts sh
 
 # Recommended Next Actions
 
-1. Dry-run the updated BASB prompts against a few representative cases: a raw idea prompt, a request to edit an existing note, and a BASB-system maintenance request.
-2. If drift remains, tighten `docs/prompts/10-capture.md` or `docs/prompts/20-organize-route.md` rather than introducing new workflow layers.
-3. Add an example capture showing how prompt-originated material should be titled, summarized, and routed.
+1. Smoke-test `npm install prompt-driven-basb` in a fresh project outside this repository to confirm the postinstall scaffold matches the package tarball contract.
+2. If further install-time polish is needed, adjust `bootstrap/README.md` or scaffold selection logic before changing BASB prompt content.
+3. Keep tarball and scaffold regression tests in sync whenever new docs or bootstrap assets are added to the package.
 
 # Recently Touched
 
-- `AGENTS.md`
-- `state/SOUL.md`
-- `docs/prompts/00-master-system.md`
-- `docs/prompts/01-session-start.md`
-- `docs/prompts/10-capture.md`
+- `bootstrap/README.md`
+- `package.json`
+- `scripts/lib/scaffold-workspace.cjs`
+- `tests/package.test.js`
+- `tests/scaffold-workspace.test.js`
 - `state/decision-log.md`

@@ -2,14 +2,14 @@ const fs = require('node:fs');
 const path = require('node:path');
 
 const workspaceEntries = Object.freeze([
-  'AGENTS.md',
-  'BASBGuide.md',
-  'LICENSE',
-  'README.md',
-  'docs',
-  'examples',
-  'templates',
-  'vault',
+  { source: 'AGENTS.md', target: 'AGENTS.md' },
+  { source: 'BASBGuide.md', target: 'BASBGuide.md' },
+  { source: 'LICENSE', target: 'LICENSE' },
+  { source: path.join('bootstrap', 'README.md'), target: 'README.md' },
+  { source: path.join('docs', 'prompts'), target: path.join('docs', 'prompts') },
+  { source: 'examples', target: 'examples' },
+  { source: 'templates', target: 'templates' },
+  { source: 'vault', target: 'vault' },
 ]);
 
 function ensureDirectory(dirPath) {
@@ -98,8 +98,8 @@ function scaffoldWorkspace({
 
   for (const entry of workspaceEntries) {
     syncPath(
-      path.join(resolvedPackageRoot, entry),
-      path.join(resolvedTargetRoot, entry),
+      path.join(resolvedPackageRoot, entry.source),
+      path.join(resolvedTargetRoot, entry.target),
       { overwriteExisting: true },
     );
   }

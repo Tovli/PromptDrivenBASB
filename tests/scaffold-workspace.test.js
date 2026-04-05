@@ -26,6 +26,7 @@ test('scaffolds BASB workspace files into the target root and initializes bootst
   assert.equal(fs.existsSync(path.join(targetRoot, 'vault', 'inbox', '.gitkeep')), true);
   assert.equal(fs.existsSync(path.join(targetRoot, 'state', 'SOUL.md')), true);
   assert.equal(fs.existsSync(path.join(targetRoot, 'state', 'decision-log.md')), true);
+  assert.equal(fs.existsSync(path.join(targetRoot, 'docs', 'plans')), false);
 
   const decisionLog = fs.readFileSync(
     path.join(targetRoot, 'state', 'decision-log.md'),
@@ -62,6 +63,22 @@ test('scaffolded workspace instructions treat new prompts as second-brain intake
   assert.match(capturePrompt, /new user prompt as source material/i);
 });
 
+test('scaffolded README stays BASB-focused and omits package-publishing details', () => {
+  const targetRoot = createTempDir();
+
+  scaffoldWorkspace({
+    packageRoot: path.join(__dirname, '..'),
+    targetRoot,
+    timestamp: '2026-04-05T15:00:00.000Z',
+  });
+
+  const readme = fs.readFileSync(path.join(targetRoot, 'README.md'), 'utf8');
+
+  assert.doesNotMatch(readme, /^## NPM Package$/m);
+  assert.doesNotMatch(readme, /prompt-driven-basb/);
+  assert.doesNotMatch(readme, /docs\/plans\//);
+});
+
 test('overwrites packaged workspace files but preserves existing local state on install or upgrade', () => {
   const targetRoot = createTempDir();
   const existingStatePath = path.join(targetRoot, 'state', 'MEMORY.md');
@@ -87,7 +104,7 @@ test('overwrites packaged workspace files but preserves existing local state on 
 
   assert.equal(fs.readFileSync(existingStatePath, 'utf8'), 'custom-memory');
   assert.equal(fs.readFileSync(existingReadmePath, 'utf8'), fs.readFileSync(
-    path.join(__dirname, '..', 'README.md'),
+    path.join(__dirname, '..', 'bootstrap', 'README.md'),
     'utf8',
   ));
   assert.equal(fs.readFileSync(existingPromptPath, 'utf8'), fs.readFileSync(
