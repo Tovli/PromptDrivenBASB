@@ -95,3 +95,18 @@ test('packaged startup assets point normal sessions to classify-first loading', 
   assert.doesNotMatch(sessionStart, /after reading the core state files/i);
   assert.doesNotMatch(readme, /For a normal BASB session, read these in order:\s+1\.\s+`BASBGuide\.md`/is);
 });
+
+test('publish workflow creates a GitHub release for each CI version', () => {
+  const workflow = fs.readFileSync(
+    path.join(packageRoot, '.github', 'workflows', 'publish-npm.yml'),
+    'utf8',
+  );
+
+  assert.match(workflow, /permissions:\s*\n\s*contents:\s+write/);
+  assert.match(workflow, /- name: Create GitHub release/);
+  assert.match(workflow, /uses:\s+actions\/github-script@v8/);
+  assert.match(workflow, /steps\.publish\.outcome == 'success'/);
+  assert.match(workflow, /steps\.version\.outputs\.publish_reason == 'gitHead already published'/);
+  assert.match(workflow, /const tag = `v\$\{\{ steps\.version\.outputs\.publish_version \}\}`;/);
+  assert.match(workflow, /generate_release_notes:\s+true/);
+});
