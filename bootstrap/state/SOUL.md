@@ -8,7 +8,8 @@ tags:
   - "soul"
   - "operating-charter"
 related_docs:
-  - "BASBGuide.md"
+  - "AGENTS.md"
+  - ".basb/prompts/01-session-start.md"
   - ".basb/prompts/00-master-system.md"
 ---
 # Mission
@@ -49,13 +50,9 @@ Use the question: "How and when will the user use this next?" Route by next use,
 
 # Session Start
 
-At the beginning of any BASB session, read:
+Use `AGENTS.md` and `.basb/prompts/01-session-start.md` as the startup dispatcher.
 
-1. `BASBGuide.md`
-2. `state/SOUL.md`
-3. `state/MEMORY.md`
-4. `state/active-context.md`
-5. The task-specific prompt file
+Load this file when that dispatcher selects the core BASB runtime charter, or when BASB-system maintenance needs the BASB rules in full.
 
 # Session Close
 

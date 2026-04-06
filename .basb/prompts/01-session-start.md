@@ -2,18 +2,17 @@
 title: "BASB Session Start"
 purpose: "Start any BASB session consistently, classify the incoming prompt, and gather only the minimum viable context."
 stage: "maintain"
-updated_at: "2026-04-05T16:04:15.9555516+03:00"
+updated_at: "2026-04-06T18:03:44.8728655+03:00"
 inputs:
-  - "state/SOUL.md"
-  - "state/MEMORY.md"
-  - "state/active-context.md"
+  - "AGENTS.md"
+  - "Current user prompt"
 outputs:
   - "A short session plan and the minimal file set needed for the task"
 requires_review_when:
-  - "The task is ambiguous after reading the core state files"
+  - "The task is still ambiguous after classification and the first relevant BASB files are loaded"
 related_docs:
-  - ".basb/prompts/00-master-system.md"
-  - "state/active-context.md"
+  - "AGENTS.md"
+  - ".basb/prompts/02-context-selection.md"
 tags:
   - "basb"
   - "prompt"
@@ -21,12 +20,48 @@ tags:
 ---
 # Startup Checklist
 
-1. Read `BASBGuide.md`.
-2. Read `state/SOUL.md`.
-3. Read `state/MEMORY.md`.
-4. Read `state/active-context.md`.
-5. Read the task-specific prompt.
-6. Classify the incoming user prompt as one of: new capture, work on an existing note, BASB system maintenance, or transient conversation.
+1. Read `AGENTS.md`.
+2. Read this prompt.
+3. Classify the incoming user prompt as one of: new capture, work on an existing note, BASB system maintenance, or transient conversation.
+4. Load only the smallest context bundle that matches the classification.
+
+# Context Bundles
+
+## New Capture
+
+Read:
+
+- `state/SOUL.md`
+- `.basb/prompts/10-capture.md`
+- `.basb/prompts/20-organize-route.md` only if the captured material is ready to route in the same session
+
+If the task ends up depending on multiple notes, add `.basb/prompts/02-context-selection.md` before reading more.
+
+## Existing-Note Work
+
+Read:
+
+- `state/SOUL.md`
+- the note frontmatter first
+- the note body only if the task cannot be completed from frontmatter, summary, or distillation layers
+- the smallest task-specific BASB prompt needed next
+
+Use `.basb/prompts/02-context-selection.md` only if more than 3 to 5 notes appear relevant.
+
+## BASB-System Maintenance
+
+Read:
+
+- `state/SOUL.md`
+- `state/MEMORY.md`
+- `state/active-context.md`
+- `.basb/prompts/00-master-system.md`
+
+Read `BASBGuide.md` only if the task is architectural, prompt-design, or package-maintainer work.
+
+## Transient Conversation
+
+Keep BASB overhead minimal. Do not create or update durable BASB artifacts unless the user explicitly wants persistence.
 
 # Prompt Intake Default
 
@@ -48,7 +83,7 @@ Produce a short pre-edit summary with:
 
 - Read frontmatter before full note bodies.
 - Prefer local project context over scanning the whole vault.
-- If more than 5 notes seem relevant, narrow the set before continuing.
+- If more than 3 to 5 notes seem relevant, narrow the set with `.basb/prompts/02-context-selection.md` before continuing.
 
 # When to Stop and Ask
 
@@ -65,3 +100,4 @@ When finished:
 1. Summarize the file changes.
 2. Append to `state/decision-log.md`.
 3. Update `state/active-context.md` if the next likely task changed.
+4. Queue unresolved ambiguity in `state/review-queue.md`.

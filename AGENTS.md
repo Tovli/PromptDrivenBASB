@@ -2,14 +2,14 @@
 title: "BASB Agent Instructions"
 type: "state"
 status: "active"
-updated_at: "2026-04-05T16:04:15.9555516+03:00"
+updated_at: "2026-04-06T17:55:28.7716136+03:00"
 tags:
   - "basb"
   - "agent"
   - "session-start"
 related_docs:
   - "README.md"
-  - "BASBGuide.md"
+  - ".basb/prompts/01-session-start.md"
   - "state/SOUL.md"
   - ".basb/prompts/00-master-system.md"
 ---
@@ -19,17 +19,22 @@ This repository is a prompt-driven BASB workspace. Codex is the BASB engine. Do 
 
 # Session Start
 
-For any new session, read these files in order:
+For any new session, start with these files in order:
 
 1. `AGENTS.md`
-2. `BASBGuide.md`
-3. `state/SOUL.md`
-4. `state/MEMORY.md`
-5. `state/active-context.md`
-6. `.basb/prompts/00-master-system.md`
-7. The task-specific prompt in `.basb/prompts/`
+2. `.basb/prompts/01-session-start.md`
+3. Classify the current user prompt before loading more context.
+4. Load only the minimum relevant BASB files for that classification.
 
-If the task is specific to an existing note, read that note after scanning its frontmatter.
+Use these startup bundles:
+
+- normal capture: `state/SOUL.md`, `.basb/prompts/10-capture.md`, and `.basb/prompts/20-organize-route.md` only if routing is needed
+- existing-note work: `state/SOUL.md`, the note frontmatter, the note body only if needed, and the smallest task-specific prompt
+- BASB-system maintenance: `state/SOUL.md`, `state/MEMORY.md`, `state/active-context.md`, and `.basb/prompts/00-master-system.md`
+- architecture, prompt-pack, or package-maintainer work: the BASB-system maintenance bundle plus `BASBGuide.md`
+- transient conversation: keep BASB overhead minimal and do not create durable artifacts unless the user clearly wants that
+
+If the task is specific to an existing note, scan its frontmatter before reading the full body.
 
 # Core Rules
 
@@ -75,6 +80,8 @@ Use vault-relative paths in `related_docs`.
 
 Use the smallest prompt that fits the task:
 
+- session startup and context selection: `.basb/prompts/01-session-start.md`, then `.basb/prompts/02-context-selection.md` only if the candidate note set is still broad
+- BASB-system maintenance, architecture review, or prompt-pack changes: `.basb/prompts/00-master-system.md`
 - new prompt intake or ad hoc idea capture: `.basb/prompts/10-capture.md` then `.basb/prompts/20-organize-route.md`
 - capture: `.basb/prompts/10-capture.md`
 - route: `.basb/prompts/20-organize-route.md`
@@ -103,7 +110,7 @@ Before moving a note across P.A.R.A. boundaries, produce:
 # Operating Pattern
 
 1. Classify the current user prompt first: new capture, existing-note work, BASB system maintenance, or transient conversation.
-2. Read the minimum relevant context.
+2. Read the minimum relevant context bundle for that classification.
 3. Scan frontmatter before full note bodies.
 4. Make the smallest useful change.
 5. Update frontmatter if the note materially changed.

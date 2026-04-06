@@ -72,3 +72,26 @@ test('package manifest scaffolds the BASB workspace on install', () => {
 
   assert.equal(manifest.scripts.postinstall, 'node scripts/postinstall.cjs');
 });
+
+test('packaged startup assets point normal sessions to classify-first loading', () => {
+  const agents = fs.readFileSync(path.join(packageRoot, 'AGENTS.md'), 'utf8');
+  const readme = fs.readFileSync(path.join(packageRoot, 'README.md'), 'utf8');
+  const sessionStart = fs.readFileSync(
+    path.join(packageRoot, '.basb', 'prompts', '01-session-start.md'),
+    'utf8',
+  );
+
+  assert.equal(
+    fs.existsSync(path.join(packageRoot, '.basb', 'prompts', '01-session-start.md')),
+    true,
+  );
+  assert.match(agents, /`AGENTS\.md`/);
+  assert.match(agents, /`\.basb\/prompts\/01-session-start\.md`/);
+  assert.equal(
+    agents.indexOf('`AGENTS.md`') < agents.indexOf('`.basb/prompts/01-session-start.md`'),
+    true,
+  );
+  assert.match(sessionStart, /classify the incoming user prompt/i);
+  assert.doesNotMatch(sessionStart, /after reading the core state files/i);
+  assert.doesNotMatch(readme, /For a normal BASB session, read these in order:\s+1\.\s+`BASBGuide\.md`/is);
+});
