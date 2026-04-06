@@ -2,7 +2,7 @@
 title: "Decision Log"
 type: "state"
 status: "active"
-updated_at: "2026-04-06T18:03:44.8728655+03:00"
+updated_at: "2026-04-06T19:18:42.2570528+03:00"
 tags:
   - "basb"
   - "decision-log"
@@ -32,3 +32,4 @@ related_docs:
 - `2026-04-05T16:04:15.9555516+03:00` | basb-hidden-folder-convention | Moved repository-owned BASB prompts and plans from `docs/` to `.basb/`, updated package asset paths and install scaffold behavior to materialize `.basb/prompts`, refreshed repo and bootstrap instructions, and verified the package/scaffold tests against the new hidden-folder convention. | confidence: `0.99` | review_required: `false`
 - `2026-04-06T13:12:23.1137597+03:00` | sparc-startup-context-plan | Added a SPARC implementation plan for reducing default BASB startup context on the package happy path and updated active context to track that work. | confidence: `0.98` | review_required: `false`
 - `2026-04-06T18:03:44.8728655+03:00` | classify-first-startup-implementation | Reworked BASB startup docs, prompts, scaffold state templates, and onboarding files so normal sessions classify first and then load only the minimum context bundle. Added regression coverage, verified with `npm test`, `npm pack --json --dry-run`, and a fresh scaffold smoke check, and logged the historical workflow plan as superseded for startup guidance. | confidence: `0.99` | review_required: `false`
+- `2026-04-06T19:18:42.2570528+03:00` | github-release-on-publish | Updated the npm publish workflow so each CI-created package version also creates a matching GitHub release and `v<version>` tag. Added a regression test for the workflow and verified the change with `node --test tests/package.test.js` and `npm test`. | confidence: `0.99` | review_required: `false`
