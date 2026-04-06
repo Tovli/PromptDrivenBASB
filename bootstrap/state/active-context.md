@@ -14,6 +14,8 @@ related_docs:
 
 This BASB workspace was initialized from `prompt-driven-basb`. The next likely task is to personalize the local state files and capture the first real note into `vault/inbox/`.
 
+Load this file only when the current local focus matters to the task. It is conditional context, not mandatory startup context.
+
 # Current Boundaries
 
 - Keep the BASB system file-first and markdown-first.

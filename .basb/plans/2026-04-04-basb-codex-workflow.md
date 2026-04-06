@@ -1,5 +1,7 @@
 # BASB Codex Prompt Workflow Plan
 
+> Historical note: the startup flow in this plan predates the classify-first dispatcher introduced in `AGENTS.md` and `.basb/prompts/01-session-start.md`. Use the current dispatcher for normal BASB sessions.
+
 > **For Codex:** REQUIRED SUB-SKILL: Use superpowers:executing-plans to implement this plan task-by-task.
 
 **Goal:** Turn this workspace into a prompt-driven BASB system where Codex itself performs capture, organization, distillation, expression, and maintenance without building an external app or service.

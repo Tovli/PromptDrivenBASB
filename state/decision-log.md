@@ -2,7 +2,7 @@
 title: "Decision Log"
 type: "state"
 status: "active"
-updated_at: "2026-04-05T16:04:15.9555516+03:00"
+updated_at: "2026-04-06T18:03:44.8728655+03:00"
 tags:
   - "basb"
   - "decision-log"
@@ -30,3 +30,5 @@ related_docs:
 - `2026-04-05T15:08:23.1163396+03:00` | prompt-intake-regression-test | Added a scaffold-level regression test that verifies packaged BASB instructions treat new prompts as second-brain intake, and updated bootstrap `state/SOUL.md` so fresh installs inherit the same rule. | confidence: `0.98` | review_required: `false`
 - `2026-04-05T15:57:46.2377284+03:00` | npm-install-readme-and-docs-scope | Split the scaffolded workspace README from the package README by adding `bootstrap/README.md`, updated the install scaffold to copy only `.basb/prompts`, and added regression tests to keep package-publishing details and `.basb/plans/` content out of installed BASB workspaces. | confidence: `0.99` | review_required: `false`
 - `2026-04-05T16:04:15.9555516+03:00` | basb-hidden-folder-convention | Moved repository-owned BASB prompts and plans from `docs/` to `.basb/`, updated package asset paths and install scaffold behavior to materialize `.basb/prompts`, refreshed repo and bootstrap instructions, and verified the package/scaffold tests against the new hidden-folder convention. | confidence: `0.99` | review_required: `false`
+- `2026-04-06T13:12:23.1137597+03:00` | sparc-startup-context-plan | Added a SPARC implementation plan for reducing default BASB startup context on the package happy path and updated active context to track that work. | confidence: `0.98` | review_required: `false`
+- `2026-04-06T18:03:44.8728655+03:00` | classify-first-startup-implementation | Reworked BASB startup docs, prompts, scaffold state templates, and onboarding files so normal sessions classify first and then load only the minimum context bundle. Added regression coverage, verified with `npm test`, `npm pack --json --dry-run`, and a fresh scaffold smoke check, and logged the historical workflow plan as superseded for startup guidance. | confidence: `0.99` | review_required: `false`

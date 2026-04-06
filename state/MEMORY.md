@@ -2,19 +2,20 @@
 title: "BASB Memory"
 type: "state"
 status: "active"
-updated_at: "2026-04-05T16:04:15.9555516+03:00"
+updated_at: "2026-04-06T17:55:28.7716136+03:00"
 tags:
   - "basb"
   - "memory"
 related_docs:
   - "state/SOUL.md"
-  - ".basb/plans/2026-04-04-basb-codex-workflow.md"
+  - ".basb/prompts/01-session-start.md"
 ---
 # Stable Conventions
 
 - Use YAML frontmatter on operational markdown files.
 - Use vault-relative paths in `related_docs`.
 - Keep BASB prompt and plan assets under `.basb/`, not `docs/`.
+- Use `AGENTS.md` plus `.basb/prompts/01-session-start.md` to decide the startup context bundle.
 - Route by actionability and next use, not subject matter.
 - Use `state/review-queue.md` for low-confidence routing or summarization decisions.
 - Scan frontmatter and executive summaries before reading full source material.
