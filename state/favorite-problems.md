@@ -8,6 +8,7 @@ tags:
   - "favorite-problems"
 related_docs:
   - ".basb/prompts/70-favorite-problems.md"
+  - ".basb/system/MEMORY.md"
   - "state/MEMORY.md"
 ---
 # Purpose

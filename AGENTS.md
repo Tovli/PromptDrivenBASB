@@ -10,7 +10,7 @@ tags:
 related_docs:
   - "README.md"
   - ".basb/prompts/01-session-start.md"
-  - "state/SOUL.md"
+  - ".basb/system/SOUL.md"
   - ".basb/prompts/00-master-system.md"
 ---
 # Purpose
@@ -28,9 +28,9 @@ For any new session, start with these files in order:
 
 Use these startup bundles:
 
-- normal capture: `state/SOUL.md`, `.basb/prompts/10-capture.md`, and `.basb/prompts/20-organize-route.md` only if routing is needed
-- existing-note work: `state/SOUL.md`, the note frontmatter, the note body only if needed, and the smallest task-specific prompt
-- BASB-system maintenance: `state/SOUL.md`, `state/MEMORY.md`, `state/active-context.md`, and `.basb/prompts/00-master-system.md`
+- normal capture: `.basb/system/SOUL.md`, `state/SOUL.md`, `.basb/prompts/10-capture.md`, and `.basb/prompts/20-organize-route.md` only if routing is needed
+- existing-note work: `.basb/system/SOUL.md`, `state/SOUL.md`, the note frontmatter, the note body only if needed, and the smallest task-specific prompt
+- BASB-system maintenance: `.basb/system/SOUL.md`, `.basb/system/MEMORY.md`, `state/SOUL.md`, `state/MEMORY.md`, `state/active-context.md`, and `.basb/prompts/00-master-system.md`
 - architecture, prompt-pack, or package-maintainer work: the BASB-system maintenance bundle plus `BASBGuide.md`
 - transient conversation: keep BASB overhead minimal and do not create durable artifacts unless the user clearly wants that
 
@@ -71,7 +71,8 @@ Use vault-relative paths in `related_docs`.
 # Repository Layout
 
 - `.basb/prompts/`: BASB workflow prompts
-- `state/`: persistent operating state
+- `.basb/system/`: package-owned canonical BASB state that refreshes on upgrade
+- `state/`: workspace-local BASB state that must be preserved on upgrade
 - `templates/`: note and brief templates
 - `vault/`: BASB knowledge base
 - `examples/`: sample captures and expected outputs

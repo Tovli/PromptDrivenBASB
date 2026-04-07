@@ -11,6 +11,7 @@ requires_review_when:
   - "The candidate set stays too broad after filtering"
 related_docs:
   - ".basb/prompts/01-session-start.md"
+  - ".basb/system/MEMORY.md"
   - "state/MEMORY.md"
 tags:
   - "basb"

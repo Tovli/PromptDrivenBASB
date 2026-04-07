@@ -11,6 +11,7 @@ requires_review_when:
   - "The match is weak or mostly thematic rather than useful"
 related_docs:
   - "state/favorite-problems.md"
+  - ".basb/system/MEMORY.md"
   - "state/MEMORY.md"
 tags:
   - "basb"

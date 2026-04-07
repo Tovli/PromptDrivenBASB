@@ -12,6 +12,7 @@ requires_review_when:
   - "Two P.A.R.A. categories seem equally plausible"
   - "The user’s next intended use is unclear"
 related_docs:
+  - ".basb/system/SOUL.md"
   - "state/SOUL.md"
   - "state/review-queue.md"
 tags:

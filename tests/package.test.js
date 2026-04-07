@@ -32,8 +32,13 @@ test('exposes named asset shortcuts for common workspace files', () => {
   assert.equal(assets.readme, path.join(packageRoot, 'README.md'));
   assert.equal(assets.agents, path.join(packageRoot, 'AGENTS.md'));
   assert.equal(assets.masterPrompt, path.join(packageRoot, '.basb', 'prompts', '00-master-system.md'));
+  assert.equal(assets.systemDir, path.join(packageRoot, '.basb', 'system'));
+  assert.equal(assets.systemSoul, path.join(packageRoot, '.basb', 'system', 'SOUL.md'));
+  assert.equal(assets.systemMemory, path.join(packageRoot, '.basb', 'system', 'MEMORY.md'));
   assert.equal(fs.existsSync(assets.stateDir), true);
   assert.equal(fs.existsSync(assets.masterPrompt), true);
+  assert.equal(fs.existsSync(assets.systemSoul), true);
+  assert.equal(fs.existsSync(assets.systemMemory), true);
 });
 
 test('lists prompt markdown files from the packaged prompt directory', () => {
@@ -60,7 +65,11 @@ test('npm tarball excludes client-local state files', () => {
     packedFilePaths.some((filePath) => filePath === '.basb/plans' || filePath.startsWith('.basb/plans/')),
     false,
   );
+  assert.equal(packedFilePaths.includes('.basb/system/SOUL.md'), true);
+  assert.equal(packedFilePaths.includes('.basb/system/MEMORY.md'), true);
+  assert.equal(packedFilePaths.includes('bootstrap/state/active-context.md'), true);
   assert.equal(packedFilePaths.includes('bootstrap/state/SOUL.md'), true);
+  assert.equal(packedFilePaths.includes('bootstrap/state/MEMORY.md'), true);
   assert.equal(packedFilePaths.includes('.basb/prompts/00-master-system.md'), true);
   assert.equal(packedFilePaths.includes('scripts/postinstall.cjs'), true);
 });

@@ -5,8 +5,9 @@ This workspace implements BASB as a Codex-operated prompt system, not as an exte
 ## What This Workspace Contains
 
 - `BASBGuide.md`: the architectural reference document for deeper BASB design work.
+- `.basb/system/`: package-owned canonical BASB state that refreshes on upgrade.
 - `.basb/prompts/`: reusable prompts for BASB operations.
-- `state/`: durable operating memory, review queues, and decision logs.
+- `state/`: workspace-local BASB state, review queues, and decision logs.
 - `templates/`: note and brief templates with YAML frontmatter.
 - `vault/`: the working knowledge base.
 - `examples/`: sample inputs and expected outputs.
@@ -35,6 +36,8 @@ For a normal BASB session:
 Read `BASBGuide.md` only for BASB-system maintenance, prompt design, package-maintainer work, or architecture review.
 
 Read `.basb/prompts/00-master-system.md` when the session is BASB-system maintenance or another deeper multi-file BASB change.
+
+Use `.basb/system/` for canonical package rules and `state/` for workspace-local BASB memory.
 
 ## Typical Workflow
 

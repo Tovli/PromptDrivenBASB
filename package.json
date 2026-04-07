@@ -36,6 +36,7 @@
     "README.md",
     "bootstrap",
     ".basb/prompts",
+    ".basb/system",
     "examples",
     "scripts/postinstall.cjs",
     "scripts/lib/scaffold-workspace.cjs",

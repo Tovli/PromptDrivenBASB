@@ -22,10 +22,13 @@ test('scaffolds BASB workspace files into the target root and initializes bootst
   assert.equal(fs.existsSync(path.join(targetRoot, 'AGENTS.md')), true);
   assert.equal(fs.existsSync(path.join(targetRoot, 'BASBGuide.md')), true);
   assert.equal(fs.existsSync(path.join(targetRoot, '.basb', 'prompts', '00-master-system.md')), true);
+  assert.equal(fs.existsSync(path.join(targetRoot, '.basb', 'system', 'SOUL.md')), true);
+  assert.equal(fs.existsSync(path.join(targetRoot, '.basb', 'system', 'MEMORY.md')), true);
   assert.equal(fs.existsSync(path.join(targetRoot, 'templates', 'project-note.md')), true);
   assert.equal(fs.existsSync(path.join(targetRoot, 'vault', 'inbox', '.gitkeep')), true);
-  assert.equal(fs.existsSync(path.join(targetRoot, 'state', 'SOUL.md')), true);
   assert.equal(fs.existsSync(path.join(targetRoot, 'state', 'decision-log.md')), true);
+  assert.equal(fs.existsSync(path.join(targetRoot, 'state', 'SOUL.md')), true);
+  assert.equal(fs.existsSync(path.join(targetRoot, 'state', 'MEMORY.md')), true);
   assert.equal(fs.existsSync(path.join(targetRoot, '.basb', 'plans')), false);
 
   const decisionLog = fs.readFileSync(
@@ -47,7 +50,7 @@ test('scaffolded workspace instructions treat new prompts as second-brain intake
   });
 
   const agents = fs.readFileSync(path.join(targetRoot, 'AGENTS.md'), 'utf8');
-  const soul = fs.readFileSync(path.join(targetRoot, 'state', 'SOUL.md'), 'utf8');
+  const soul = fs.readFileSync(path.join(targetRoot, '.basb', 'system', 'SOUL.md'), 'utf8');
   const masterPrompt = fs.readFileSync(
     path.join(targetRoot, '.basb', 'prompts', '00-master-system.md'),
     'utf8',
@@ -61,6 +64,22 @@ test('scaffolded workspace instructions treat new prompts as second-brain intake
   assert.match(soul, /new user prompt as potential second-brain material/i);
   assert.match(masterPrompt, /new user prompt as a candidate addition to the user's second brain/i);
   assert.match(capturePrompt, /new user prompt as source material/i);
+});
+
+test('scaffolded local state files stay lightweight and point to canonical system state', () => {
+  const targetRoot = createTempDir();
+
+  scaffoldWorkspace({
+    packageRoot: path.join(__dirname, '..'),
+    targetRoot,
+    timestamp: '2026-04-05T15:00:00.000Z',
+  });
+
+  const localSoul = fs.readFileSync(path.join(targetRoot, 'state', 'SOUL.md'), 'utf8');
+  const localMemory = fs.readFileSync(path.join(targetRoot, 'state', 'MEMORY.md'), 'utf8');
+
+  assert.match(localSoul, /\.basb\/system\/SOUL\.md/);
+  assert.match(localMemory, /\.basb\/system\/MEMORY\.md/);
 });
 
 test('scaffolded startup instructions use classify-first loading for normal BASB sessions', () => {
@@ -78,7 +97,7 @@ test('scaffolded startup instructions use classify-first loading for normal BASB
     path.join(targetRoot, '.basb', 'prompts', '01-session-start.md'),
     'utf8',
   );
-  const soul = fs.readFileSync(path.join(targetRoot, 'state', 'SOUL.md'), 'utf8');
+  const soul = fs.readFileSync(path.join(targetRoot, '.basb', 'system', 'SOUL.md'), 'utf8');
 
   assert.match(agents, /`AGENTS\.md`/);
   assert.match(agents, /`\.basb\/prompts\/01-session-start\.md`/);
@@ -111,7 +130,7 @@ test('scaffolded README stays BASB-focused and omits package-publishing details'
 
 test('overwrites packaged workspace files but preserves existing local state on install or upgrade', () => {
   const targetRoot = createTempDir();
-  const existingStatePath = path.join(targetRoot, 'state', 'MEMORY.md');
+  const existingStatePath = path.join(targetRoot, 'state', 'review-queue.md');
   const existingReadmePath = path.join(targetRoot, 'README.md');
   const existingPromptPath = path.join(
     targetRoot,
@@ -119,12 +138,20 @@ test('overwrites packaged workspace files but preserves existing local state on 
     'prompts',
     '00-master-system.md',
   );
+  const existingSystemPath = path.join(
+    targetRoot,
+    '.basb',
+    'system',
+    'MEMORY.md',
+  );
 
   fs.mkdirSync(path.dirname(existingStatePath), { recursive: true });
   fs.mkdirSync(path.dirname(existingPromptPath), { recursive: true });
+  fs.mkdirSync(path.dirname(existingSystemPath), { recursive: true });
   fs.writeFileSync(existingStatePath, 'custom-memory', 'utf8');
   fs.writeFileSync(existingReadmePath, 'custom-readme', 'utf8');
   fs.writeFileSync(existingPromptPath, 'custom-prompt', 'utf8');
+  fs.writeFileSync(existingSystemPath, 'custom-system-memory', 'utf8');
 
   scaffoldWorkspace({
     packageRoot: path.join(__dirname, '..'),
@@ -141,6 +168,11 @@ test('overwrites packaged workspace files but preserves existing local state on 
     path.join(__dirname, '..', '.basb', 'prompts', '00-master-system.md'),
     'utf8',
   ));
+  assert.equal(fs.readFileSync(existingSystemPath, 'utf8'), fs.readFileSync(
+    path.join(__dirname, '..', '.basb', 'system', 'MEMORY.md'),
+    'utf8',
+  ));
   assert.equal(fs.existsSync(path.join(targetRoot, 'state', 'SOUL.md')), true);
   assert.equal(fs.existsSync(path.join(targetRoot, '.basb', 'prompts', '10-capture.md')), true);
+  assert.equal(fs.existsSync(path.join(targetRoot, '.basb', 'system', 'SOUL.md')), true);
 });

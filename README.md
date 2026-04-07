@@ -5,9 +5,10 @@ This workspace implements BASB as a Codex-operated prompt system, not as an exte
 ## What This Repository Contains
 
 - `BASBGuide.md`: the architectural reference document for deeper BASB design work.
+- `.basb/system/`: package-owned canonical BASB state that updates with the package.
 - `.basb/plans/`: the implementation plan for the prompt system.
 - `.basb/prompts/`: reusable prompts for BASB operations.
-- `state/`: durable operating memory, review queues, and decision logs.
+- `state/`: workspace-local BASB state, review queues, and decision logs.
 - `templates/`: note and brief templates with YAML frontmatter.
 - `vault/`: the working knowledge base.
 - `examples/`: sample inputs and expected outputs.
@@ -25,7 +26,7 @@ Codex is the BASB engine.
 
 This repository can now be published as the `prompt-driven-basb` npm package.
 
-Running `npm install prompt-driven-basb` scaffolds the BASB workspace into the current project root. On first install it creates the bundled prompts, templates, examples, vault directories, and a bootstrap `state/` folder. On later installs and upgrades it refreshes the package-owned workspace files from the current package version, while `state/` only fills in missing files and preserves the user's local BASB state.
+Running `npm install prompt-driven-basb` scaffolds the BASB workspace into the current project root. On first install it creates the bundled prompts, templates, examples, vault directories, package-owned `.basb/system/` state, and a bootstrap `state/` folder. On later installs and upgrades it refreshes the package-owned workspace files from the current package version, including `.basb/system/`, while `state/` only fills in missing files and preserves the user's local BASB state.
 
 ## Getting Started
 
@@ -57,9 +58,9 @@ console.log(getAssetPath('templates/project-note.md'));
 console.log(listPromptFiles());
 ```
 
-The published package intentionally does not bundle `state/`. Client-local BASB memory, review queues, and decision logs should remain outside package upgrades so they are not overwritten when the package updates.
+The published package intentionally does not bundle the live repository `state/`. Client-local BASB memory, review queues, and decision logs should remain outside package upgrades so they are not overwritten when the package updates.
 
-The install-time `state/` folder is initialized from neutral bootstrap templates, not from this repository's live maintainer state.
+Canonical BASB rules now live in `.basb/system/` so package upgrades can refresh shared BASB behavior. The install-time `state/` folder is initialized from neutral bootstrap templates and remains user-owned local state.
 
 Local verification commands:
 
@@ -81,6 +82,8 @@ For a normal BASB session:
 Read `BASBGuide.md` only for BASB-system maintenance, prompt design, package-maintainer work, or architecture review.
 
 Read `.basb/prompts/00-master-system.md` when the session is BASB-system maintenance or another deeper multi-file BASB change.
+
+Use `.basb/system/` for canonical package rules and `state/` for workspace-local BASB memory.
 
 ## Typical Workflow
 

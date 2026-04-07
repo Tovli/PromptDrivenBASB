@@ -2,15 +2,13 @@
 title: "Decision Log"
 type: "state"
 status: "active"
-<<<<<<< HEAD
-updated_at: "2026-04-07T08:54:03.2356102+03:00"
-=======
-updated_at: "2026-04-06T19:18:42.2570528+03:00"
->>>>>>> f3f7a542cfee5bcd698025d8b2f34020ffd99902
+updated_at: "2026-04-07T10:35:00+03:00"
 tags:
   - "basb"
   - "decision-log"
 related_docs:
+  - ".basb/system/SOUL.md"
+  - ".basb/system/MEMORY.md"
   - "state/SOUL.md"
   - "state/MEMORY.md"
 ---
@@ -34,10 +32,10 @@ related_docs:
 - `2026-04-05T15:08:23.1163396+03:00` | prompt-intake-regression-test | Added a scaffold-level regression test that verifies packaged BASB instructions treat new prompts as second-brain intake, and updated bootstrap `state/SOUL.md` so fresh installs inherit the same rule. | confidence: `0.98` | review_required: `false`
 - `2026-04-05T15:57:46.2377284+03:00` | npm-install-readme-and-docs-scope | Split the scaffolded workspace README from the package README by adding `bootstrap/README.md`, updated the install scaffold to copy only `.basb/prompts`, and added regression tests to keep package-publishing details and `.basb/plans/` content out of installed BASB workspaces. | confidence: `0.99` | review_required: `false`
 - `2026-04-05T16:04:15.9555516+03:00` | basb-hidden-folder-convention | Moved repository-owned BASB prompts and plans from `docs/` to `.basb/`, updated package asset paths and install scaffold behavior to materialize `.basb/prompts`, refreshed repo and bootstrap instructions, and verified the package/scaffold tests against the new hidden-folder convention. | confidence: `0.99` | review_required: `false`
-<<<<<<< HEAD
-- `2026-04-07T08:54:03.2356102+03:00` | package-readme-getting-started | Added a package-facing Getting Started section that explains the install-to-intake workflow in Codex, emphasizes P.A.R.A.-based filing, and documents the current audio/video transcription limitation with a transcription-first workaround. | confidence: `0.98` | review_required: `false`
-=======
 - `2026-04-06T13:12:23.1137597+03:00` | sparc-startup-context-plan | Added a SPARC implementation plan for reducing default BASB startup context on the package happy path and updated active context to track that work. | confidence: `0.98` | review_required: `false`
 - `2026-04-06T18:03:44.8728655+03:00` | classify-first-startup-implementation | Reworked BASB startup docs, prompts, scaffold state templates, and onboarding files so normal sessions classify first and then load only the minimum context bundle. Added regression coverage, verified with `npm test`, `npm pack --json --dry-run`, and a fresh scaffold smoke check, and logged the historical workflow plan as superseded for startup guidance. | confidence: `0.99` | review_required: `false`
 - `2026-04-06T19:18:42.2570528+03:00` | github-release-on-publish | Updated the npm publish workflow so each CI-created package version also creates a matching GitHub release and `v<version>` tag. Added a regression test for the workflow and verified the change with `node --test tests/package.test.js` and `npm test`. | confidence: `0.99` | review_required: `false`
->>>>>>> f3f7a542cfee5bcd698025d8b2f34020ffd99902
+- `2026-04-07T08:54:03.2356102+03:00` | package-readme-getting-started | Added a package-facing Getting Started section that explains the install-to-intake workflow in Codex, emphasizes P.A.R.A.-based filing, and documents the current audio/video transcription limitation with a transcription-first workaround. | confidence: `0.98` | review_required: `false`
+- `2026-04-07T09:06:25.7917960+03:00` | contributing-guide | Added `CONTRIBUTING.md` with BASB-specific contribution rules, verification commands, and repository scope guidance. While appending this session, resolved stale merge markers in `state/decision-log.md` by preserving both logged histories. | confidence: `0.97` | review_required: `false`
+- `2026-04-07T09:51:30.7943841+03:00` | contributing-guide-before-you-start-refocus | Reworked the `Before You Start` section in `CONTRIBUTING.md` so it addresses package contributors first, distinguishes package work from BASB-behavior work, and gates the BASB session-start files behind changes that actually affect workspace semantics. | confidence: `0.98` | review_required: `false`
+- `2026-04-07T10:35:00+03:00` | canonical-system-state-upgrade-path | Added package-owned canonical BASB state under `.basb/system/`, converted `state/SOUL.md` and `state/MEMORY.md` into workspace-local overlays, refreshed install scaffolding and package exports, repointed BASB startup docs to read canonical plus local state together, and verified with targeted tests plus the full package test suite. | confidence: `0.99` | review_required: `false`

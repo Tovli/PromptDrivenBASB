@@ -7,6 +7,7 @@ const workspaceEntries = Object.freeze([
   { source: 'LICENSE', target: 'LICENSE' },
   { source: path.join('bootstrap', 'README.md'), target: 'README.md' },
   { source: path.join('.basb', 'prompts'), target: path.join('.basb', 'prompts') },
+  { source: path.join('.basb', 'system'), target: path.join('.basb', 'system') },
   { source: 'examples', target: 'examples' },
   { source: 'templates', target: 'templates' },
   { source: 'vault', target: 'vault' },

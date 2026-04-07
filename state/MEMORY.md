@@ -1,45 +1,32 @@
 ---
-title: "BASB Memory"
+title: "Local BASB Memory"
 type: "state"
 status: "active"
-updated_at: "2026-04-06T17:55:28.7716136+03:00"
+updated_at: "2026-04-07T10:20:00+03:00"
 tags:
   - "basb"
   - "memory"
+  - "local"
 related_docs:
+  - ".basb/system/MEMORY.md"
   - "state/SOUL.md"
-  - ".basb/prompts/01-session-start.md"
 ---
-# Stable Conventions
+# Purpose
 
-- Use YAML frontmatter on operational markdown files.
-- Use vault-relative paths in `related_docs`.
-- Keep BASB prompt and plan assets under `.basb/`, not `docs/`.
-- Use `AGENTS.md` plus `.basb/prompts/01-session-start.md` to decide the startup context bundle.
-- Route by actionability and next use, not subject matter.
-- Use `state/review-queue.md` for low-confidence routing or summarization decisions.
-- Scan frontmatter and executive summaries before reading full source material.
+Store repository-local BASB conventions, recurring patterns, and open loops that should remain outside the package-owned canonical BASB state.
 
-# Current System Status
+# Local Conventions
 
-- The prompt-driven BASB workspace has been bootstrapped.
-- Core state files, prompt files, templates, and examples exist.
-- The system is ready for real capture, routing, distillation, expression, and maintenance sessions.
+No repository-local conventions recorded yet.
 
 # Open Loops
 
 - Populate `state/favorite-problems.md` with the user's real long-running questions.
 - Add real project, area, and resource notes to the vault.
-- Refine prompts over time based on observed drift or review-queue patterns.
+- Record repository-local conventions here only when they differ from `.basb/system/MEMORY.md`.
 
-# Useful Paths
+# Usage Notes
 
-- Master prompt: `.basb/prompts/00-master-system.md`
-- Session start: `.basb/prompts/01-session-start.md`
-- Capture: `.basb/prompts/10-capture.md`
-- Routing: `.basb/prompts/20-organize-route.md`
-- Review queue: `state/review-queue.md`
-
-# Notes
-
-Treat this file as persistent BASB memory. Update it when conventions, risks, or recurring patterns change.
+- Read `.basb/system/MEMORY.md` first for canonical package conventions.
+- Keep this file focused on local memory that should survive reinstalls and upgrades.
+- Do not duplicate package-owned BASB rules here unless they are truly repository-specific overrides.

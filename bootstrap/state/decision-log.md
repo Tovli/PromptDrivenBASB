@@ -7,6 +7,8 @@ tags:
   - "basb"
   - "decision-log"
 related_docs:
+  - ".basb/system/SOUL.md"
+  - ".basb/system/MEMORY.md"
   - "state/SOUL.md"
   - "state/MEMORY.md"
 ---

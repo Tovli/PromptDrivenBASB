@@ -7,6 +7,7 @@ tags:
   - "basb"
   - "active-context"
 related_docs:
+  - ".basb/system/MEMORY.md"
   - "state/MEMORY.md"
   - ".basb/prompts/01-session-start.md"
 ---

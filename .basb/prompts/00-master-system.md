@@ -4,6 +4,8 @@ purpose: "Define the deeper operating rules for Codex during BASB-system mainten
 stage: "maintain"
 updated_at: "2026-04-06T17:55:28.7716136+03:00"
 inputs:
+  - ".basb/system/SOUL.md"
+  - ".basb/system/MEMORY.md"
   - "state/SOUL.md"
   - "state/MEMORY.md"
   - "state/active-context.md"
@@ -16,7 +18,7 @@ requires_review_when:
   - "The source material is too sparse to summarize responsibly"
 related_docs:
   - ".basb/plans/2026-04-04-basb-codex-workflow.md"
-  - "state/SOUL.md"
+  - ".basb/system/SOUL.md"
 tags:
   - "basb"
   - "prompt"
@@ -48,11 +50,13 @@ Do not load this prompt by default for every normal capture or existing-note ses
 
 Read these before acting:
 
-1. `state/SOUL.md`
-2. `state/MEMORY.md`
-3. `state/active-context.md`
-4. `BASBGuide.md` only if the task needs architecture, prompt-design, or package-maintainer context
-5. The task-specific prompt file if another prompt still narrows the work further
+1. `.basb/system/SOUL.md`
+2. `.basb/system/MEMORY.md`
+3. `state/SOUL.md`
+4. `state/MEMORY.md`
+5. `state/active-context.md`
+6. `BASBGuide.md` only if the task needs architecture, prompt-design, or package-maintainer context
+7. The task-specific prompt file if another prompt still narrows the work further
 
 # Prompt Intake Rule
 

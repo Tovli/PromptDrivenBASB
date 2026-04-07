@@ -31,6 +31,7 @@ tags:
 
 Read:
 
+- `.basb/system/SOUL.md`
 - `state/SOUL.md`
 - `.basb/prompts/10-capture.md`
 - `.basb/prompts/20-organize-route.md` only if the captured material is ready to route in the same session
@@ -41,6 +42,7 @@ If the task ends up depending on multiple notes, add `.basb/prompts/02-context-s
 
 Read:
 
+- `.basb/system/SOUL.md`
 - `state/SOUL.md`
 - the note frontmatter first
 - the note body only if the task cannot be completed from frontmatter, summary, or distillation layers
@@ -52,6 +54,8 @@ Use `.basb/prompts/02-context-selection.md` only if more than 3 to 5 notes appea
 
 Read:
 
+- `.basb/system/SOUL.md`
+- `.basb/system/MEMORY.md`
 - `state/SOUL.md`
 - `state/MEMORY.md`
 - `state/active-context.md`

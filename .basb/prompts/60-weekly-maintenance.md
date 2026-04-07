@@ -6,6 +6,7 @@ inputs:
   - "Project notes"
   - "Area notes"
   - "Resource notes"
+  - ".basb/system/MEMORY.md"
   - "state/MEMORY.md"
 outputs:
   - "A weekly maintenance note and any approved metadata updates"
@@ -29,7 +30,7 @@ Keep the BASB vault structurally healthy and cognitively light.
 1. Identify completed or inactive projects.
 2. Flag areas that have not been reviewed recently.
 3. Surface resource notes that should link to active work.
-4. Update `state/MEMORY.md` if system conventions changed.
+4. Update `state/MEMORY.md` if workspace-local conventions changed.
 5. Queue uncertain archive moves for review.
 
 # Output Location

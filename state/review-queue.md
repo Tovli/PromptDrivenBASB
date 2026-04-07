@@ -7,6 +7,7 @@ tags:
   - "basb"
   - "review-queue"
 related_docs:
+  - ".basb/system/SOUL.md"
   - "state/SOUL.md"
   - ".basb/prompts/21-human-review.md"
 ---

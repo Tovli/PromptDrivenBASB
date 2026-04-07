@@ -8,11 +8,14 @@ const namedAssetPaths = Object.freeze({
   guide: 'BASBGuide.md',
   readme: 'README.md',
   promptsDir: path.join('.basb', 'prompts'),
+  systemDir: path.join('.basb', 'system'),
   templatesDir: 'templates',
   stateDir: path.join('bootstrap', 'state'),
   vaultDir: 'vault',
   masterPrompt: path.join('.basb', 'prompts', '00-master-system.md'),
   capturePrompt: path.join('.basb', 'prompts', '10-capture.md'),
+  systemSoul: path.join('.basb', 'system', 'SOUL.md'),
+  systemMemory: path.join('.basb', 'system', 'MEMORY.md'),
 });
 
 function resolveAssetPath(...segments) {
