@@ -27,6 +27,26 @@ This repository can now be published as the `prompt-driven-basb` npm package.
 
 Running `npm install prompt-driven-basb` scaffolds the BASB workspace into the current project root. On first install it creates the bundled prompts, templates, examples, vault directories, and a bootstrap `state/` folder. On later installs and upgrades it refreshes the package-owned workspace files from the current package version, while `state/` only fills in missing files and preserves the user's local BASB state.
 
+## Getting Started
+
+If you already capture ideas, meeting notes, article excerpts, or rough thoughts in an LLM chat box, this package gives that habit a BASB-shaped home instead of leaving it as disposable chat.
+
+1. Install the package in the folder you want to use as your second brain:
+
+   ```bash
+   npm install prompt-driven-basb
+   ```
+
+2. Open that workspace in Codex.
+3. Paste any note you want to keep into the LLM text box.
+4. Let the BASB prompts treat that input as second-brain material, classify it by the P.A.R.A. method, and file it into the workspace as markdown.
+
+The intended loop is simple: capture first, organize by next use, and keep moving. You do not need to pre-sort your notes before you add them.
+
+### Current Limits
+
+The package does not currently support direct video or audio transcription. If there is enough demand, or a good PR, that is something I would be happy to examine. For now, the practical workaround is to transcribe the recording with any tool you prefer and then paste the transcription into the BASB system like any other note.
+
 The package also exposes a small Node API for resolving bundled paths:
 
 ```js

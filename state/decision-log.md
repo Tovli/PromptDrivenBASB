@@ -2,7 +2,7 @@
 title: "Decision Log"
 type: "state"
 status: "active"
-updated_at: "2026-04-05T16:04:15.9555516+03:00"
+updated_at: "2026-04-07T08:54:03.2356102+03:00"
 tags:
   - "basb"
   - "decision-log"
@@ -30,3 +30,4 @@ related_docs:
 - `2026-04-05T15:08:23.1163396+03:00` | prompt-intake-regression-test | Added a scaffold-level regression test that verifies packaged BASB instructions treat new prompts as second-brain intake, and updated bootstrap `state/SOUL.md` so fresh installs inherit the same rule. | confidence: `0.98` | review_required: `false`
 - `2026-04-05T15:57:46.2377284+03:00` | npm-install-readme-and-docs-scope | Split the scaffolded workspace README from the package README by adding `bootstrap/README.md`, updated the install scaffold to copy only `.basb/prompts`, and added regression tests to keep package-publishing details and `.basb/plans/` content out of installed BASB workspaces. | confidence: `0.99` | review_required: `false`
 - `2026-04-05T16:04:15.9555516+03:00` | basb-hidden-folder-convention | Moved repository-owned BASB prompts and plans from `docs/` to `.basb/`, updated package asset paths and install scaffold behavior to materialize `.basb/prompts`, refreshed repo and bootstrap instructions, and verified the package/scaffold tests against the new hidden-folder convention. | confidence: `0.99` | review_required: `false`
+- `2026-04-07T08:54:03.2356102+03:00` | package-readme-getting-started | Added a package-facing Getting Started section that explains the install-to-intake workflow in Codex, emphasizes P.A.R.A.-based filing, and documents the current audio/video transcription limitation with a transcription-first workaround. | confidence: `0.98` | review_required: `false`
