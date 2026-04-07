@@ -4,7 +4,7 @@ This workspace implements BASB as a Codex-operated prompt system, not as an exte
 
 ## What This Repository Contains
 
-- `BASBGuide.md`: the architectural source document.
+- `BASBGuide.md`: the architectural reference document for deeper BASB design work.
 - `.basb/plans/`: the implementation plan for the prompt system.
 - `.basb/prompts/`: reusable prompts for BASB operations.
 - `state/`: durable operating memory, review queues, and decision logs.
@@ -72,14 +72,15 @@ MIT
 
 ## Session Start
 
-For a normal BASB session, read these in order:
+For a normal BASB session:
 
-1. `BASBGuide.md`
-2. `state/SOUL.md`
-3. `state/MEMORY.md`
-4. `state/active-context.md`
-5. `.basb/prompts/00-master-system.md`
-6. The task-specific prompt in `.basb/prompts/`
+1. Read `AGENTS.md`.
+2. Read `.basb/prompts/01-session-start.md`.
+3. Let that dispatcher classify the task and load only the minimum relevant BASB files.
+
+Read `BASBGuide.md` only for BASB-system maintenance, prompt design, package-maintainer work, or architecture review.
+
+Read `.basb/prompts/00-master-system.md` when the session is BASB-system maintenance or another deeper multi-file BASB change.
 
 ## Typical Workflow
 

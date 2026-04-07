@@ -2,39 +2,36 @@
 title: "Active Context"
 type: "state"
 status: "active"
-updated_at: "2026-04-05T16:04:15.9555516+03:00"
+updated_at: "2026-04-06T19:18:42.2570528+03:00"
 tags:
   - "basb"
   - "active-context"
 related_docs:
   - "state/MEMORY.md"
-  - ".basb/prompts/00-master-system.md"
+  - ".basb/plans/2026-04-06-startup-context-happy-path-optimization.md"
+  - ".github/workflows/publish-npm.yml"
+  - "tests/package.test.js"
   - "package.json"
-  - "bootstrap/README.md"
-  - "scripts/lib/scaffold-workspace.cjs"
 ---
 # Current Focus
 
-The current BASB refinement focus is the hidden `.basb` workspace convention. Package-owned prompts and plan artifacts should live under `.basb/`, while installed BASB workspaces should scaffold only `.basb/prompts` and keep maintainer-only plans out of the consumer project root.
+The BASB startup-context optimization remains implemented and verified, and the npm publish workflow now creates a matching GitHub release for each CI-created package version. The next likely task is to stage this maintenance change and validate the publish-plus-release flow on the next real package release.
 
 # Current Boundaries
 
 - Keep the BASB system file-first and markdown-first.
-- Strengthen behavior through prompt and state files before adding any code.
-- Do not expand into application services, databases, or background jobs unless explicitly requested.
+- Keep package-maintainer changes limited to versioning, publish, and release automation unless a wider distribution change is explicitly requested.
+- Do not expand into application services, databases, background jobs, or hidden state unless explicitly requested.
 
 # Recommended Next Actions
 
-1. Smoke-test `npm install prompt-driven-basb` in a fresh project outside this repository to confirm the postinstall scaffold materializes `.basb/prompts` correctly.
-2. If any install-time polish is still needed, adjust `bootstrap/README.md` or scaffold selection logic without reintroducing a top-level `docs/` convention.
-3. Keep tarball and scaffold regression tests in sync whenever new `.basb` assets are added to the package.
+1. Stage and commit the publish workflow and regression test updates.
+2. Push the next package-maintainer change to `master` and confirm the workflow both publishes to npm and creates `v<version>` on GitHub.
+3. If the release output needs polish, refine generated release notes or attach release assets in the same workflow.
 
 # Recently Touched
 
-- `bootstrap/README.md`
-- `.basb/prompts/00-master-system.md`
-- `package.json`
-- `scripts/lib/scaffold-workspace.cjs`
+- `.github/workflows/publish-npm.yml`
 - `tests/package.test.js`
-- `tests/scaffold-workspace.test.js`
+- `state/active-context.md`
 - `state/decision-log.md`

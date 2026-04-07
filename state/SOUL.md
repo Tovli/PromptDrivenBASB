@@ -2,14 +2,15 @@
 title: "BASB Soul"
 type: "state"
 status: "active"
-updated_at: "2026-04-05T16:04:15.9555516+03:00"
+updated_at: "2026-04-06T17:55:28.7716136+03:00"
 tags:
   - "basb"
   - "soul"
   - "operating-charter"
 related_docs:
-  - "BASBGuide.md"
-  - ".basb/plans/2026-04-04-basb-codex-workflow.md"
+  - "AGENTS.md"
+  - ".basb/prompts/01-session-start.md"
+  - ".basb/prompts/00-master-system.md"
 ---
 # Mission
 
@@ -56,13 +57,9 @@ Use the question: "How and when will the user use this next?" Route by next use,
 
 # Session Start
 
-At the beginning of any BASB session, read:
+Use `AGENTS.md` and `.basb/prompts/01-session-start.md` as the startup dispatcher.
 
-1. `BASBGuide.md`
-2. `state/SOUL.md`
-3. `state/MEMORY.md`
-4. `state/active-context.md`
-5. The task-specific prompt file
+Load this file when that dispatcher selects the core BASB runtime charter, or when BASB-system maintenance needs the BASB rules in full.
 
 # Session Close
 

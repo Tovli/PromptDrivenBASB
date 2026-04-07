@@ -63,6 +63,36 @@ test('scaffolded workspace instructions treat new prompts as second-brain intake
   assert.match(capturePrompt, /new user prompt as source material/i);
 });
 
+test('scaffolded startup instructions use classify-first loading for normal BASB sessions', () => {
+  const targetRoot = createTempDir();
+
+  scaffoldWorkspace({
+    packageRoot: path.join(__dirname, '..'),
+    targetRoot,
+    timestamp: '2026-04-05T15:00:00.000Z',
+  });
+
+  const agents = fs.readFileSync(path.join(targetRoot, 'AGENTS.md'), 'utf8');
+  const readme = fs.readFileSync(path.join(targetRoot, 'README.md'), 'utf8');
+  const sessionStart = fs.readFileSync(
+    path.join(targetRoot, '.basb', 'prompts', '01-session-start.md'),
+    'utf8',
+  );
+  const soul = fs.readFileSync(path.join(targetRoot, 'state', 'SOUL.md'), 'utf8');
+
+  assert.match(agents, /`AGENTS\.md`/);
+  assert.match(agents, /`\.basb\/prompts\/01-session-start\.md`/);
+  assert.equal(
+    agents.indexOf('`AGENTS.md`') < agents.indexOf('`.basb/prompts/01-session-start.md`'),
+    true,
+  );
+  assert.match(sessionStart, /classify the incoming user prompt/i);
+  assert.doesNotMatch(sessionStart, /after reading the core state files/i);
+  assert.doesNotMatch(sessionStart, /1\.\s+Read `BASBGuide\.md`\./);
+  assert.doesNotMatch(readme, /For a normal BASB session, read these in order:\s+1\.\s+`BASBGuide\.md`/is);
+  assert.doesNotMatch(soul, /At the beginning of any BASB session, read:\s+1\.\s+`BASBGuide\.md`/is);
+});
+
 test('scaffolded README stays BASB-focused and omits package-publishing details', () => {
   const targetRoot = createTempDir();
 

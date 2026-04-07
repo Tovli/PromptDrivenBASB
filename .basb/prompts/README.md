@@ -18,19 +18,18 @@ tags:
 ---
 # BASB Prompt Catalog
 
-Each prompt in this directory is meant to be combined with:
+Start BASB sessions with:
 
-1. `BASBGuide.md`
-2. `state/SOUL.md`
-3. `state/MEMORY.md`
-4. `state/active-context.md`
-5. The task-specific prompt file
+1. `AGENTS.md`
+2. `01-session-start.md`
+
+Then load only the task-specific prompt and the files selected by that startup dispatcher.
 
 ## Core Prompts
 
-- `00-master-system.md`: global BASB operating rules
-- `01-session-start.md`: consistent session startup
-- `02-context-selection.md`: keep context bounded
+- `00-master-system.md`: deeper BASB operating rules for maintenance-heavy sessions
+- `01-session-start.md`: classify-first startup dispatcher
+- `02-context-selection.md`: keep context bounded once a task truly needs multiple notes
 
 ## Workflow Prompts
 
@@ -57,9 +56,10 @@ Before trusting a prompt, check that it:
 
 ## Typical Session
 
-1. Read the core state files.
-2. Read `00-master-system.md`.
-3. Use `10-capture.md` to normalize and immediately route new material when confidence allows.
-4. Use `20-organize-route.md` only for temporary inbox items or other unfiled notes.
-5. Read the minimum relevant note set.
-6. Apply the prompt and update logs.
+1. Read `AGENTS.md`.
+2. Read `01-session-start.md`.
+3. Classify the task and load only the selected BASB files.
+4. Use `10-capture.md` to normalize and immediately route new material when confidence allows.
+5. Use `20-organize-route.md` only for temporary inbox items or other unfiled notes.
+6. Read the minimum relevant note set.
+7. Apply the prompt and update logs.

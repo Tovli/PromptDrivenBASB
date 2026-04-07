@@ -1,5 +1,8 @@
 # **System Architecture and Implementation Guide for an Agentic Second Brain**
 
+> Reference use only: treat this guide as architectural background, not default runtime context.
+> Read it when the task is BASB-system maintenance, prompt design, package-maintainer work, or architecture review.
+
 ## **The Paradigm Shift in Personal Knowledge Management**
 
 The modern digital ecosystem is characterized by an overwhelming, relentless influx of information, a phenomenon that routinely leads to cognitive fatigue, decision paralysis, and systemic information overload. Traditional personal knowledge management practices have historically exacerbated this problem by relying on rigid, highly nested, academic-style categorization structures. These legacy systems demand significant manual maintenance and cognitive overhead, effectively forcing the user to act as a full-time librarian rather than a strategic thinker. The "Building a Second Brain" methodology, originally pioneered by Tiago Forte, offers a structural counter-approach: a system designed entirely around immediate actionability rather than topical taxonomy, allowing the biological brain to focus exclusively on high-level cognitive tasks such as complex decision-making and creative synthesis while offloading memory storage to a trusted technological counterpart.

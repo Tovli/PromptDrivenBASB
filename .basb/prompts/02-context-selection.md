@@ -19,6 +19,8 @@ tags:
 ---
 # Selection Rules
 
+Use this prompt only after startup classification has shown that one task needs multiple notes.
+
 1. Start with frontmatter and filenames, not note bodies.
 2. Prefer notes with matching tags, linked projects, recent timestamps, and direct `related_docs` references.
 3. Prefer distilled notes over raw captures when both exist.
