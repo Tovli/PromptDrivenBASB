@@ -38,14 +38,14 @@ If the task is specific to an existing note, scan its frontmatter before reading
 
 # Core Rules
 
-1. Use P.A.R.A. only: `projects`, `areas`, `resources`, `archives`.
-2. Preserve source material. Distillation adds layers and summaries; it does not replace the original content.
-3. Prefer frontmatter for metadata and the markdown body for substance.
-4. Route by next intended use and actionability, not by topic alone.
-5. Treat each new user prompt as incoming second-brain material by default. If it introduces net-new durable information, capture, classify, and document it in the same session unless the user clearly asked for BASB system maintenance or transient conversation.
+1. Use P.A.R.A. only for user-facing note organization: `projects`, `areas`, `resources`, `archives`. `vault/sources/`, `vault/index.md`, and `vault/log.md` are operational support artifacts that hold immutable source material, a human-readable catalog, and a knowledge-evolution log. They do not create a fifth P.A.R.A. category.
+2. Preserve source material. Raw sources captured under `vault/sources/` are immutable; distillation, synthesis, and expression create or update derived compiled notes rather than rewrite the source.
+3. Prefer frontmatter for metadata and the markdown body for substance. Compiled notes in P.A.R.A. carry a second classification axis through `artifact_kind` and provenance fields that link back to source notes.
+4. Route by next intended use and actionability, not by topic alone. Routing applies only to compiled notes; `vault/sources/` is never routed into P.A.R.A.
+5. Treat each new user prompt as incoming second-brain material by default. If it introduces net-new durable information, capture, classify, and document it in the same session unless the user clearly asked for BASB system maintenance or transient conversation. Durable source material goes through `.basb/prompts/11-ingest-source.md` so one source can update many compiled notes.
 6. If routing is involved, produce the JSON routing decision before moving the note.
 7. If confidence is below `0.80`, prefer `state/review-queue.md` over guessing.
-8. After any state-changing session, append a concise entry to `state/decision-log.md`.
+8. After any state-changing session, append a concise entry to `state/decision-log.md`. When ingest, synthesis, contradiction resolution, or durable expression meaningfully changes the vault, also append to `vault/log.md` and refresh `vault/index.md` if a high-value note is created or substantially altered.
 9. Keep the system local-first and file-based. Do not introduce services, databases, schedulers, or hidden state unless the user explicitly asks for that change.
 
 # Frontmatter Policy
@@ -74,7 +74,7 @@ Use vault-relative paths in `related_docs`.
 - `.basb/system/`: package-owned canonical BASB state that refreshes on upgrade
 - `state/`: workspace-local BASB state that must be preserved on upgrade
 - `templates/`: note and brief templates
-- `vault/`: BASB knowledge base
+- `vault/`: BASB knowledge base. `vault/projects/`, `vault/areas/`, `vault/resources/`, `vault/archives/` hold compiled notes in P.A.R.A. `vault/sources/` holds immutable source notes as an operational provenance layer. `vault/index.md` is the package-owned catalog of high-value compiled notes. `vault/log.md` is the human-readable knowledge-evolution log.
 - `examples/`: sample captures and expected outputs
 
 # Prompt Selection
@@ -85,12 +85,14 @@ Use the smallest prompt that fits the task:
 - BASB-system maintenance, architecture review, or prompt-pack changes: `.basb/prompts/00-master-system.md`
 - new prompt intake or ad hoc idea capture: `.basb/prompts/10-capture.md` then `.basb/prompts/20-organize-route.md`
 - capture: `.basb/prompts/10-capture.md`
+- durable source ingest: `.basb/prompts/11-ingest-source.md`
 - route: `.basb/prompts/20-organize-route.md`
 - ambiguous routing: `.basb/prompts/21-human-review.md`
 - distill: `.basb/prompts/30-distill-layer2.md`, `31-distill-layer3.md`, `32-distill-layer4.md`
 - express: `.basb/prompts/40-express.md`
 - daily maintenance: `.basb/prompts/50-daily-brief.md`
 - weekly maintenance: `.basb/prompts/60-weekly-maintenance.md`
+- knowledge lint: `.basb/prompts/61-knowledge-lint.md`
 - favorite problems review: `.basb/prompts/70-favorite-problems.md`
 
 # Routing Contract

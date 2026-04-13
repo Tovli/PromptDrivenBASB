@@ -72,6 +72,14 @@ test('npm tarball excludes client-local state files', () => {
   assert.equal(packedFilePaths.includes('bootstrap/state/MEMORY.md'), true);
   assert.equal(packedFilePaths.includes('.basb/prompts/00-master-system.md'), true);
   assert.equal(packedFilePaths.includes('scripts/postinstall.cjs'), true);
+
+  // compiled-wiki additions
+  assert.equal(packedFilePaths.includes('.basb/prompts/11-ingest-source.md'), true);
+  assert.equal(packedFilePaths.includes('.basb/prompts/61-knowledge-lint.md'), true);
+  assert.equal(packedFilePaths.includes('templates/source-note.md'), true);
+  assert.equal(packedFilePaths.includes('vault/index.md'), true);
+  assert.equal(packedFilePaths.includes('vault/log.md'), true);
+  assert.equal(packedFilePaths.includes('vault/sources/.gitkeep'), true);
 });
 
 test('package manifest scaffolds the BASB workspace on install', () => {

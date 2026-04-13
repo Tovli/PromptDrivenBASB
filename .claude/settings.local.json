@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node --test tests/prompt-pack.test.js tests/package.test.js tests/scaffold-workspace.test.js)",
+      "Bash(npm pack:*)",
+      "Bash(node -e ':*)",
+      "Bash(npm test:*)"
+    ]
+  }
+}

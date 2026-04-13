@@ -8,11 +8,25 @@ tags:
   - "brief"
   - "daily"
 related_docs: []
-scope: "active projects, inbox, areas"
+scope: "active projects, inbox, areas, recent ingest"
 ---
 # Priorities
 
 # Review Needed
+
+# Recent Ingest
+
+<!--
+High-value sources ingested since the last brief (from vault/log.md) and any
+compiled notes they updated.
+-->
+
+# Notes Needing Synthesis or Backlinks
+
+<!--
+Compiled notes that the last knowledge lint flagged as stale, orphaned, or
+missing backlinks. Keep this actionable, not exhaustive.
+-->
 
 # Recommended Next Actions
 

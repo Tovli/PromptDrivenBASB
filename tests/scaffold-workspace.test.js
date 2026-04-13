@@ -128,6 +128,35 @@ test('scaffolded README stays BASB-focused and omits package-publishing details'
   assert.doesNotMatch(readme, /\.basb\/plans\//);
 });
 
+test('scaffolds compiled-wiki vault support files and source ingest prompts', () => {
+  const targetRoot = createTempDir();
+
+  scaffoldWorkspace({
+    packageRoot: path.join(__dirname, '..'),
+    targetRoot,
+    timestamp: '2026-04-13T11:57:59.000Z',
+  });
+
+  assert.equal(fs.existsSync(path.join(targetRoot, 'vault', 'index.md')), true);
+  assert.equal(fs.existsSync(path.join(targetRoot, 'vault', 'log.md')), true);
+  assert.equal(fs.existsSync(path.join(targetRoot, 'vault', 'sources', '.gitkeep')), true);
+  assert.equal(fs.existsSync(path.join(targetRoot, 'templates', 'source-note.md')), true);
+  assert.equal(
+    fs.existsSync(path.join(targetRoot, '.basb', 'prompts', '11-ingest-source.md')),
+    true,
+  );
+  assert.equal(
+    fs.existsSync(path.join(targetRoot, '.basb', 'prompts', '61-knowledge-lint.md')),
+    true,
+  );
+
+  const agents = fs.readFileSync(path.join(targetRoot, 'AGENTS.md'), 'utf8');
+  assert.match(agents, /vault\/sources\//);
+  assert.match(agents, /operational/i);
+  // scaffolded AGENTS.md must explicitly deny that vault/sources/ is a fifth P.A.R.A. category
+  assert.match(agents, /do not create a fifth.*category/i);
+});
+
 test('overwrites packaged workspace files but preserves existing local state on install or upgrade', () => {
   const targetRoot = createTempDir();
   const existingStatePath = path.join(targetRoot, 'state', 'review-queue.md');

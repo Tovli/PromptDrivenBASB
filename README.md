@@ -7,11 +7,11 @@ This workspace implements BASB as a Codex-operated prompt system, not as an exte
 - `BASBGuide.md`: the architectural reference document for deeper BASB design work.
 - `.basb/system/`: package-owned canonical BASB state that updates with the package.
 - `.basb/plans/`: the implementation plan for the prompt system.
-- `.basb/prompts/`: reusable prompts for BASB operations.
+- `.basb/prompts/`: reusable prompts for BASB operations, including source ingest and knowledge lint.
 - `state/`: workspace-local BASB state, review queues, and decision logs.
-- `templates/`: note and brief templates with YAML frontmatter.
-- `vault/`: the working knowledge base.
-- `examples/`: sample inputs and expected outputs.
+- `templates/`: note and brief templates with YAML frontmatter, including an immutable source-note template.
+- `vault/`: the working knowledge base. `vault/projects/`, `vault/areas/`, `vault/resources/`, `vault/archives/` hold compiled notes in P.A.R.A. `vault/sources/` preserves immutable source material as an operational provenance layer. `vault/index.md` is a human-readable catalog of high-value compiled notes, and `vault/log.md` is the knowledge-evolution log.
+- `examples/`: sample inputs and expected outputs, including a source-ingest example.
 
 ## Core Idea
 
@@ -87,11 +87,13 @@ Use `.basb/system/` for canonical package rules and `state/` for workspace-local
 
 ## Typical Workflow
 
-1. Capture raw material into `vault/inbox/`.
-2. Route it into `projects`, `areas`, `resources`, or `archives`.
-3. Distill the note in layers.
-4. Use the note set to produce plans, briefs, or syntheses.
-5. Run daily and weekly maintenance prompts.
+1. Capture or ingest the input. Durable source material is preserved verbatim in `vault/sources/` via `.basb/prompts/11-ingest-source.md`. Direct compiled-note updates go straight to the relevant P.A.R.A. note.
+2. Create or update compiled notes in `projects`, `areas`, `resources`, or `archives` with `artifact_kind` and provenance frontmatter linking back to the source.
+3. Distill the compiled note in layers. Raw sources under `vault/sources/` stay untouched.
+4. Use the compiled note set to express plans, briefs, or syntheses. Persist durable outputs back into the vault by default.
+5. Run daily and weekly maintenance. Weekly maintenance includes `.basb/prompts/61-knowledge-lint.md` to flag orphan notes, stale summaries, contradictions, and broken source lineage.
+
+Meaningful ingest, synthesis, and cleanup events are appended to `vault/log.md`, and high-value pages are cataloged in `vault/index.md`. Both files are package-owned and local-first — no services, databases, or schedulers are introduced.
 
 ## Frontmatter Policy
 
@@ -108,10 +110,11 @@ Keep the note body for actual content, extracted insight, and next actions.
 
 ## First Real Use
 
-1. Put a real capture in `vault/inbox/` using `.basb/prompts/10-capture.md`.
-2. Route it with `.basb/prompts/20-organize-route.md`.
-3. If ambiguous, queue it with `.basb/prompts/21-human-review.md`.
-4. Distill it with the `30-32` prompt chain.
+1. Run `.basb/prompts/10-capture.md` on the input. The dispatcher decides whether the input is transient, a direct compiled-note update, or durable source material.
+2. For durable source material, let `.basb/prompts/11-ingest-source.md` create the immutable source note in `vault/sources/` and update or create derived compiled notes in P.A.R.A.
+3. For compiled notes whose destination is unclear, route with `.basb/prompts/20-organize-route.md`. If still ambiguous, escalate with `.basb/prompts/21-human-review.md`.
+4. Distill the compiled note with the `30-32` prompt chain. Immutable sources stay immutable.
+5. Run `.basb/prompts/60-weekly-maintenance.md` weekly; it calls `.basb/prompts/61-knowledge-lint.md` and `.basb/prompts/70-favorite-problems.md` automatically.
 
 ## Scope Boundary
 

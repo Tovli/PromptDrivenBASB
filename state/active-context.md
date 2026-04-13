@@ -2,7 +2,7 @@
 title: "Active Context"
 type: "state"
 status: "active"
-updated_at: "2026-04-07T10:35:00+03:00"
+updated_at: "2026-04-13T11:57:59.8014811+03:00"
 tags:
   - "basb"
   - "active-context"
@@ -11,6 +11,7 @@ related_docs:
   - "state/MEMORY.md"
   - ".basb/plans/2026-04-06-startup-context-happy-path-optimization.md"
   - ".basb/plans/2026-04-07-canonical-system-state-upgrade-path.md"
+  - ".basb/plans/2026-04-13-compiled-wiki-basb-upgrade.md"
   - ".github/workflows/publish-npm.yml"
   - "tests/package.test.js"
   - "tests/scaffold-workspace.test.js"
@@ -18,26 +19,28 @@ related_docs:
 ---
 # Current Focus
 
-The package now splits BASB state ownership between package-owned canonical files under `.basb/system/` and workspace-local files under `state/`. The next likely task is to review and stage the canonical-state upgrade-path change, then validate that a real package upgrade refreshes `.basb/system/` while preserving existing `state/` content.
+The compiled-wiki upgrade from `.basb/plans/2026-04-13-compiled-wiki-basb-upgrade.md` has landed across all six tasks. BASB now preserves immutable sources in `vault/sources/`, keeps compiled notes in P.A.R.A. with `artifact_kind` and provenance frontmatter, ingests one-source-to-many-derived-updates via `.basb/prompts/11-ingest-source.md`, persists durable expressed outputs back into the vault, and runs a weekly structural lint through `.basb/prompts/61-knowledge-lint.md`. `vault/index.md` and `vault/log.md` are the operational catalog and knowledge log. The next likely task is either a real-run exercise of the new ingest path on actual source material, or reviewing `state/review-queue.md` for design ambiguities that surfaced during implementation.
 
 # Current Boundaries
 
 - Keep the BASB system file-first and markdown-first.
-- Keep package-maintainer changes limited to versioning, publish, and release automation unless a wider distribution change is explicitly requested.
+- Keep the compiled-wiki upgrade local-first and markdown-first.
+- Keep P.A.R.A. as the user-facing note organization model. `vault/sources/`, `vault/index.md`, and `vault/log.md` are operational support artifacts, not a fifth category.
 - Do not expand into application services, databases, background jobs, or hidden state unless explicitly requested.
 
 # Recommended Next Actions
 
-1. Smoke-test `npm install prompt-driven-basb` into a fresh temp project and confirm `.basb/system/` is created alongside local `state/` overlay files.
-2. Upgrade an existing scaffolded workspace and confirm `.basb/system/` refreshes while customized `state/` files are preserved.
-3. Stage and publish the package-maintainer changes once the upgrade path is confirmed end-to-end.
+1. Exercise the new ingest flow on a real durable source to confirm the dispatcher, source template, and provenance fields feel right end-to-end.
+2. Scan `state/review-queue.md` for any ambiguity items that arose during implementation and either resolve or triage them.
+3. Consider whether the compiled-wiki upgrade should be published as the next npm version; if so, run `npm test` and `npm run pack:check` before pushing.
 
 # Recently Touched
 
-- `.basb/system/SOUL.md`
-- `.basb/system/MEMORY.md`
-- `scripts/lib/scaffold-workspace.cjs`
-- `tests/package.test.js`
-- `tests/scaffold-workspace.test.js`
-- `state/active-context.md`
-- `state/decision-log.md`
+- `.basb/plans/2026-04-13-compiled-wiki-basb-upgrade.md`
+- `.basb/prompts/10-capture.md`, `11-ingest-source.md`, `20-organize-route.md`, `21-human-review.md`, `30-32` distill chain, `40-express.md`, `50-daily-brief.md`, `60-weekly-maintenance.md`, `61-knowledge-lint.md`, `70-favorite-problems.md`, `README.md`
+- `templates/source-note.md`, `project-note.md`, `area-note.md`, `resource-note.md`, `archive-note.md`, `inbox-note.md`, `daily-brief.md`, `weekly-review.md`
+- `vault/index.md`, `vault/log.md`, `vault/sources/.gitkeep`
+- `examples/expected-outputs/distillation-example.md`, `source-ingest-example.md`
+- `tests/prompt-pack.test.js`, `package.test.js`, `scaffold-workspace.test.js`, `package.json`
+- `AGENTS.md`, `README.md`, `bootstrap/README.md`, `BASBGuide.md`
+- `state/active-context.md`, `state/decision-log.md`

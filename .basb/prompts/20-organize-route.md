@@ -22,7 +22,13 @@ tags:
 ---
 # Goal
 
-Decide where a note belongs in P.A.R.A. based on the user's likely next use.
+Decide where a compiled note belongs in P.A.R.A. based on the user's likely next use.
+
+# Scope
+
+- This prompt routes compiled notes only. `vault/sources/` holds immutable source material and is an operational provenance layer, not a P.A.R.A. category. Never move files into, out of, or between `vault/sources/` with this prompt.
+- Inbox is a temporary holding area for ambiguous compiled notes. It is not for immutable sources that were already captured responsibly through `.basb/prompts/11-ingest-source.md`.
+- `vault/index.md` and `vault/log.md` are operational artifacts; they are never routed.
 
 # P.A.R.A. Decision Rules
 
@@ -30,7 +36,7 @@ Decide where a note belongs in P.A.R.A. based on the user's likely next use.
 - Area: ongoing responsibility without a natural finish line.
 - Resource: useful reference not tied to active execution.
 - Archive: inactive or completed material.
-- Inbox is not a P.A.R.A. category. It is only a temporary holding area for notes that cannot yet be routed safely.
+- Inbox is not a P.A.R.A. category. It is only a temporary holding area for compiled notes that cannot yet be routed safely.
 
 Never create a fifth category.
 
@@ -64,7 +70,9 @@ If the note is moved:
 2. Update `status`.
 3. Update `updated_at`.
 4. Fill `route_reason`.
-5. Refresh `tags`, `related_docs`, and `linked_projects` if needed.
+5. Set `artifact_kind` to the best-fitting value (`concept`, `comparison`, `timeline`, `synthesis`, `source-summary`).
+6. Preserve `derived_from`, `source_ids`, `source_count`, `last_ingested_at`, `claims_last_checked_at`, `supersedes`, and `contradicts` from any prior ingest. Never wipe provenance when only the routing changed.
+7. Refresh `tags`, `related_docs`, and `linked_projects` if needed.
 
 If the note is not moved:
 

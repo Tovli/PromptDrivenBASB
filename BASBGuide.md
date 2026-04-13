@@ -3,6 +3,19 @@
 > Reference use only: treat this guide as architectural background, not default runtime context.
 > Read it when the task is BASB-system maintenance, prompt design, package-maintainer work, or architecture review.
 
+## **Package Implementation Note**
+
+This guide is architectural background. It surveys how an agentic second brain *could* be built, including service-heavy, database-backed, and vector-search-heavy approaches. **This package does not implement those.** `prompt-driven-basb` is deliberately local-first and file-based: prompts, templates, and markdown files only. Do not read this guide as a roadmap toward services, MCP integration, vector databases, schedulers, or background daemons.
+
+Concretely, the package implements the compiled-wiki slice of the architecture:
+
+- **Immutable sources** are preserved verbatim in `vault/sources/` (an operational provenance layer, not a fifth P.A.R.A. category).
+- **Compiled notes** live in `vault/projects/`, `vault/areas/`, `vault/resources/`, `vault/archives/` with `artifact_kind` and provenance frontmatter that link back to source notes.
+- **Ingest, distill, express, and maintenance** are prompt-driven (`.basb/prompts/10-capture.md`, `11-ingest-source.md`, `30-32` distill chain, `40-express.md`, `60-weekly-maintenance.md`, `61-knowledge-lint.md`).
+- **System observability** is the package-owned catalog `vault/index.md` and the append-only `vault/log.md`.
+
+Where the guide below mentions embedding similarity, protocol servers, relational backends, background scans, or autonomous daemons, read those as descriptions of alternative architectures that deliberately fall outside this package's scope. See the "Compiled-Wiki Implementation in This Package" section at the end of this document for the mapping that *is* shipped.
+
 ## **The Paradigm Shift in Personal Knowledge Management**
 
 The modern digital ecosystem is characterized by an overwhelming, relentless influx of information, a phenomenon that routinely leads to cognitive fatigue, decision paralysis, and systemic information overload. Traditional personal knowledge management practices have historically exacerbated this problem by relying on rigid, highly nested, academic-style categorization structures. These legacy systems demand significant manual maintenance and cognitive overhead, effectively forcing the user to act as a full-time librarian rather than a strategic thinker. The "Building a Second Brain" methodology, originally pioneered by Tiago Forte, offers a structural counter-approach: a system designed entirely around immediate actionability rather than topical taxonomy, allowing the biological brain to focus exclusively on high-level cognitive tasks such as complex decision-making and creative synthesis while offloading memory storage to a trusted technological counterpart.
@@ -178,3 +191,46 @@ When the user engages in active, focused work on a specific project, they intera
 Finally, the agent autonomously executes a rigorous weekly maintenance protocol to ensure the long-term health of the ecosystem. It systematically queries the entire database against the established matrix of the twelve favorite problems, utilizing high-dimensional embedding similarity algorithms to uncover novel, non-obvious connections between disparate pieces of information gathered over the preceding weeks. It surfaces these serendipitous connections to the user for review. Simultaneously, it executes structural housekeeping: refining semantic tags, automatically migrating completed project folders to the archive, updating state trackers, and ensuring the entire system remains pristine, deeply interconnected, and highly actionable for the week ahead.
 
 Through this meticulously engineered architecture, the burden of remembering and organizing is permanently outsourced to the machine, leaving the biological brain happily unoptimized, free to wander, and fully capable of focusing its finite energy on the synthesis of new ideas and the execution of high-leverage creative work.
+
+## **Compiled-Wiki Implementation in This Package**
+
+This package implements the architecture above as a local-first, file-based compiled wiki. No services, no databases, no schedulers, no background daemons, no vector stores. The behaviors described in the preceding sections are realized through prompt files and markdown artifacts that a human or an agent can operate deterministically.
+
+### **Sources and compiled notes are separated by design**
+
+- `vault/sources/` holds immutable source notes. Each source is captured once through `.basb/prompts/11-ingest-source.md`, preserved verbatim, and never rewritten. Re-ingesting an updated upstream source creates a new source id rather than editing the existing one.
+- `vault/projects/`, `vault/areas/`, `vault/resources/`, and `vault/archives/` hold compiled notes organized by P.A.R.A. Compiled notes carry a second classification axis through the `artifact_kind` frontmatter field (`concept`, `comparison`, `timeline`, `synthesis`, `source-summary`).
+- Provenance is tracked in frontmatter: `derived_from`, `source_ids`, `source_count`, `last_ingested_at`, `claims_last_checked_at`, `supersedes`, and `contradicts`. Every compiled note also includes a `# Source Lineage` body section that mirrors `source_ids` in human-readable form.
+
+### **Ingest updates many compiled notes from one source**
+
+The ingest prompt is deliberately one-source-in, many-derived-updates. A single article can create one new compiled note, update three existing ones, and record a contradiction against a fourth. Source material is never collapsed into one routed note by default.
+
+### **Maintenance is prompt-driven, not scheduled**
+
+- `.basb/prompts/50-daily-brief.md` surfaces recent ingest and notes flagged by the last lint, but it runs only when the user asks for a brief.
+- `.basb/prompts/60-weekly-maintenance.md` runs favorite-problem matching and knowledge lint as part of the same session.
+- `.basb/prompts/61-knowledge-lint.md` performs structural checks (orphans, stale summaries, contradictions, broken source lineage, index drift) and returns a concrete maintenance report with vault paths and proposed repairs.
+- `.basb/prompts/70-favorite-problems.md` is callable during ingest, during weekly maintenance, or on demand — all without any scheduler.
+
+### **Expression persists durable outputs back into the vault**
+
+`.basb/prompts/40-express.md` treats a durable synthesized answer as a vault-writing act. When an expressed output will be reused, merges claims across multiple compiled notes, answers a favorite problem, or resolves a contradiction, it is saved as a routed compiled note, back-linked from the contributing notes, logged in `vault/log.md`, and indexed in `vault/index.md` when it becomes a hub or canonical page.
+
+### **Operational visibility is two plain-text files**
+
+- `vault/index.md` is the human-readable catalog of high-value compiled notes, active hubs, and recently updated pages.
+- `vault/log.md` is the append-only knowledge-evolution log. Source ingest, synthesis, contradiction resolutions, and durable output promotions are recorded here with one entry per event.
+
+Both files are package-owned and refreshed on upgrade; neither is a P.A.R.A. category. Together they give the user the system observability that heavier architectures try to reach with dashboards and databases, while keeping the entire stack grep-able and diff-able.
+
+### **Out of scope for this package**
+
+The following are described above as alternatives, not as targets for this package:
+
+- vector databases, embedding stores, semantic-search infrastructure
+- MCP servers or any protocol-based integrations with external tools
+- cron jobs, webhooks, background daemons, or automated async triage
+- cloud relational backends and multi-user synchronization
+
+If a future contribution genuinely needs one of those, it belongs in a separate package. This package's scope is the compiled-wiki behavior implemented through prompts, templates, and local markdown files.

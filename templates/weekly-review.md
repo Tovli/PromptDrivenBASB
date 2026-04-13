@@ -8,13 +8,29 @@ tags:
   - "review"
   - "weekly"
 related_docs: []
-scope: "projects, areas, resources, archives"
+scope: "projects, areas, resources, archives, vault/log.md, lint report"
 ---
 # Structural Changes
 
 # Archive Candidates
 
 # Area Reviews
+
+# Favorite Problem Matches
+
+<!--
+Output from .basb/prompts/70-favorite-problems.md against the set of notes
+changed since the last weekly review.
+-->
+
+# Knowledge Lint Findings
+
+<!--
+Output from .basb/prompts/61-knowledge-lint.md. Include the concrete report,
+not a summary. Each finding must cite at least one vault path.
+-->
+
+# Proposed Note Merges, Backlink Repairs, and Summary Refreshes
 
 # Cross-Note Opportunities
 

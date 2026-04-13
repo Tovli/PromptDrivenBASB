@@ -2,6 +2,7 @@
 title: "BASB Prompt Catalog"
 purpose: "Describe the available BASB prompt files and how to use them."
 stage: "maintain"
+updated_at: "2026-04-13T11:57:59.8014811+03:00"
 inputs:
   - ".basb/prompts/"
 outputs:
@@ -10,7 +11,10 @@ requires_review_when:
   - "The prompt catalog is out of sync with the actual prompt files"
 related_docs:
   - ".basb/plans/2026-04-04-basb-codex-workflow.md"
+  - ".basb/plans/2026-04-13-compiled-wiki-basb-upgrade.md"
   - "README.md"
+  - "vault/index.md"
+  - "vault/log.md"
 tags:
   - "basb"
   - "prompt"
@@ -25,6 +29,12 @@ Start BASB sessions with:
 
 Then load only the task-specific prompt and the files selected by that startup dispatcher.
 
+## How BASB Stores Knowledge
+
+- **Immutable sources** live under `vault/sources/`. Each source is captured once, never rewritten. This is an operational provenance layer, not a fifth P.A.R.A. category.
+- **Compiled notes** live in `vault/projects/`, `vault/areas/`, `vault/resources/`, and `vault/archives/`. They synthesize information from one or more immutable sources, carry `artifact_kind` and provenance frontmatter, and are the notes that get distilled, linked, and expressed.
+- **Operational catalogs** are `vault/index.md` (what matters right now) and `vault/log.md` (how the vault has evolved). They are package-owned files and update continuously as the vault changes.
+
 ## Core Prompts
 
 - `00-master-system.md`: deeper BASB operating rules for maintenance-heavy sessions
@@ -33,16 +43,18 @@ Then load only the task-specific prompt and the files selected by that startup d
 
 ## Workflow Prompts
 
-- `10-capture.md`: normalize raw material and route it immediately when possible
-- `20-organize-route.md`: route notes from temporary holding into final P.A.R.A.
-- `21-human-review.md`: escalate ambiguity safely
-- `30-distill-layer2.md`: bold key concepts
+- `10-capture.md`: dispatcher that routes input to transient, direct compiled-note update, or durable source ingest
+- `11-ingest-source.md`: create an immutable source note in `vault/sources/` and update or create derived compiled notes in P.A.R.A.
+- `20-organize-route.md`: route compiled notes from temporary holding into final P.A.R.A. (never routes `vault/sources/`)
+- `21-human-review.md`: escalate routing ambiguity or promotion ambiguity safely
+- `30-distill-layer2.md`: bold key concepts in a compiled note, preserving source lineage
 - `31-distill-layer3.md`: highlight the fastest reading path
 - `32-distill-layer4.md`: write the executive synthesis
-- `40-express.md`: produce grounded outputs from the vault
-- `50-daily-brief.md`: daily orientation brief
-- `60-weekly-maintenance.md`: weekly cleanup and review
-- `70-favorite-problems.md`: compare notes to enduring questions
+- `40-express.md`: produce grounded outputs from the vault and persist reusable ones back into the vault
+- `50-daily-brief.md`: daily orientation brief that surfaces recent ingest and notes needing synthesis
+- `60-weekly-maintenance.md`: weekly cleanup, review, favorite-problem pass, and lint
+- `61-knowledge-lint.md`: structural checks on compiled notes and provenance
+- `70-favorite-problems.md`: compare notes to enduring questions, callable during ingest, weekly maintenance, or on demand
 
 ## Validation Checklist
 
@@ -59,7 +71,7 @@ Before trusting a prompt, check that it:
 1. Read `AGENTS.md`.
 2. Read `01-session-start.md`.
 3. Classify the task and load only the selected BASB files.
-4. Use `10-capture.md` to normalize and immediately route new material when confidence allows.
-5. Use `20-organize-route.md` only for temporary inbox items or other unfiled notes.
-6. Read the minimum relevant note set.
-7. Apply the prompt and update logs.
+4. Use `10-capture.md` to dispatch. For durable source material, hand off to `11-ingest-source.md`. For direct compiled-note updates, operate on the existing routed note. For transient conversation, do not persist.
+5. Use `20-organize-route.md` only for compiled notes whose P.A.R.A. destination still needs to be decided.
+6. Apply distill, express, or maintenance prompts as needed.
+7. Update `vault/log.md`, `vault/index.md`, and `state/decision-log.md` when the vault materially changes.
