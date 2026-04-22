@@ -7,8 +7,10 @@ export type AssetName =
   | 'templatesDir'
   | 'stateDir'
   | 'vaultDir'
+  | 'retrievalDir'
   | 'masterPrompt'
   | 'capturePrompt'
+  | 'retrievalRefreshPrompt'
   | 'systemSoul'
   | 'systemMemory';
 

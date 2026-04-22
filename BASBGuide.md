@@ -11,6 +11,7 @@ Concretely, the package implements the compiled-wiki slice of the architecture:
 
 - **Immutable sources** are preserved verbatim in `vault/sources/` (an operational provenance layer, not a fifth P.A.R.A. category).
 - **Compiled notes** live in `vault/projects/`, `vault/areas/`, `vault/resources/`, `vault/archives/` with `artifact_kind` and provenance frontmatter that link back to source notes.
+- **Retrieval artifacts** live under `vault/retrieval/` as file-based support assets: catalog, question map, pattern index, and relationship index.
 - **Ingest, distill, express, and maintenance** are prompt-driven (`.basb/prompts/10-capture.md`, `11-ingest-source.md`, `30-32` distill chain, `40-express.md`, `60-weekly-maintenance.md`, `61-knowledge-lint.md`).
 - **System observability** is the package-owned catalog `vault/index.md` and the append-only `vault/log.md`.
 
@@ -223,6 +224,14 @@ The ingest prompt is deliberately one-source-in, many-derived-updates. A single 
 - `vault/log.md` is the append-only knowledge-evolution log. Source ingest, synthesis, contradiction resolutions, and durable output promotions are recorded here with one entry per event.
 
 Both files are package-owned and refreshed on upgrade; neither is a P.A.R.A. category. Together they give the user the system observability that heavier architectures try to reach with dashboards and databases, while keeping the entire stack grep-able and diff-able.
+
+### **Retrieval stays file-based**
+
+- `vault/retrieval/catalog.md` is the machine-friendly manifest of high-value compiled notes.
+- `vault/retrieval/question-map.md` maps durable questions to the notes that answer them.
+- `vault/retrieval/pattern-index.md` captures recurring contradictions, comparisons, timelines, themes, and causal patterns.
+- `vault/retrieval/relationship-index.md` keeps a compact edge list between notes, sources, entities, and questions.
+- `.basb/prompts/62-retrieval-refresh.md` refreshes that layer after ingest, durable expression, or weekly maintenance without introducing a database or a background service.
 
 ### **Out of scope for this package**
 

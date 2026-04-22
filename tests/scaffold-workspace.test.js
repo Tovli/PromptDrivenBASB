@@ -10,6 +10,43 @@ function createTempDir() {
   return fs.mkdtempSync(path.join(os.tmpdir(), 'basb-scaffold-test-'));
 }
 
+function assertCanonicalIdentityDocs(content, label) {
+  assert.match(
+    content,
+    /stable `canonical_id`[^.\n]{0,120}(retrieval identity|stable identity)/i,
+    `${label} should describe canonical_id as the compiled note's stable retrieval identity`,
+  );
+  assert.match(
+    content,
+    /(`derived_from`|`source_ids`)[^.\n]{0,120}(source lineage|source)/i,
+    `${label} should route source lineage through provenance fields`,
+  );
+  assert.doesNotMatch(
+    content,
+    /stable `canonical_id`[^.\n]{0,120}(linking back to the source|links back to (its )?source lineage)/i,
+    `${label} should not define canonical_id as the source-lineage pointer`,
+  );
+}
+
+function assertRetrievalRefreshScopeDocs(content, label) {
+  assert.match(content, /62-retrieval-refresh\.md/);
+  assert.match(
+    content,
+    /(materially change|materially changes|materially changed)[\s\S]{0,120}(bounded|affected)[\s\S]{0,40}note set/i,
+    `${label} should scope retrieval refresh to the materially changed bounded note set`,
+  );
+  assert.doesNotMatch(
+    content,
+    /62-retrieval-refresh\.md[\s\S]{0,120}high-value note/i,
+    `${label} should not limit retrieval refresh to high-value notes`,
+  );
+  assert.doesNotMatch(
+    content,
+    /62-retrieval-refresh\.md[\s\S]{0,120}high-value compiled note/i,
+    `${label} should not limit retrieval refresh to high-value notes`,
+  );
+}
+
 test('scaffolds BASB workspace files into the target root and initializes bootstrap state', () => {
   const targetRoot = createTempDir();
 
@@ -128,6 +165,21 @@ test('scaffolded README stays BASB-focused and omits package-publishing details'
   assert.doesNotMatch(readme, /\.basb\/plans\//);
 });
 
+test('scaffolded README preserves canonical_id and retrieval-refresh maintenance contracts', () => {
+  const targetRoot = createTempDir();
+
+  scaffoldWorkspace({
+    packageRoot: path.join(__dirname, '..'),
+    targetRoot,
+    timestamp: '2026-04-22T10:00:00.000Z',
+  });
+
+  const readme = fs.readFileSync(path.join(targetRoot, 'README.md'), 'utf8');
+
+  assertCanonicalIdentityDocs(readme, 'scaffolded README.md');
+  assertRetrievalRefreshScopeDocs(readme, 'scaffolded README.md');
+});
+
 test('scaffolds compiled-wiki vault support files and source ingest prompts', () => {
   const targetRoot = createTempDir();
 
@@ -149,12 +201,34 @@ test('scaffolds compiled-wiki vault support files and source ingest prompts', ()
     fs.existsSync(path.join(targetRoot, '.basb', 'prompts', '61-knowledge-lint.md')),
     true,
   );
+  assert.equal(
+    fs.existsSync(path.join(targetRoot, '.basb', 'prompts', '62-retrieval-refresh.md')),
+    true,
+  );
+  assert.equal(fs.existsSync(path.join(targetRoot, 'vault', 'retrieval', 'catalog.md')), true);
+  assert.equal(
+    fs.existsSync(path.join(targetRoot, 'vault', 'retrieval', 'question-map.md')),
+    true,
+  );
+  assert.equal(
+    fs.existsSync(path.join(targetRoot, 'vault', 'retrieval', 'pattern-index.md')),
+    true,
+  );
+  assert.equal(
+    fs.existsSync(path.join(targetRoot, 'vault', 'retrieval', 'relationship-index.md')),
+    true,
+  );
 
   const agents = fs.readFileSync(path.join(targetRoot, 'AGENTS.md'), 'utf8');
   assert.match(agents, /vault\/sources\//);
   assert.match(agents, /operational/i);
   // scaffolded AGENTS.md must explicitly deny that vault/sources/ is a fifth P.A.R.A. category
   assert.match(agents, /do not create a fifth.*category/i);
+  assert.match(agents, /vault\/retrieval\//);
+
+  const readme = fs.readFileSync(path.join(targetRoot, 'README.md'), 'utf8');
+  assert.match(readme, /vault\/retrieval\//);
+  assert.match(readme, /question map/i);
 });
 
 test('overwrites packaged workspace files but preserves existing local state on install or upgrade', () => {

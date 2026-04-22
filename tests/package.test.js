@@ -35,10 +35,17 @@ test('exposes named asset shortcuts for common workspace files', () => {
   assert.equal(assets.systemDir, path.join(packageRoot, '.basb', 'system'));
   assert.equal(assets.systemSoul, path.join(packageRoot, '.basb', 'system', 'SOUL.md'));
   assert.equal(assets.systemMemory, path.join(packageRoot, '.basb', 'system', 'MEMORY.md'));
+  assert.equal(assets.retrievalDir, path.join(packageRoot, 'vault', 'retrieval'));
+  assert.equal(
+    assets.retrievalRefreshPrompt,
+    path.join(packageRoot, '.basb', 'prompts', '62-retrieval-refresh.md'),
+  );
   assert.equal(fs.existsSync(assets.stateDir), true);
   assert.equal(fs.existsSync(assets.masterPrompt), true);
   assert.equal(fs.existsSync(assets.systemSoul), true);
   assert.equal(fs.existsSync(assets.systemMemory), true);
+  assert.equal(fs.existsSync(assets.retrievalDir), true);
+  assert.equal(fs.existsSync(assets.retrievalRefreshPrompt), true);
 });
 
 test('lists prompt markdown files from the packaged prompt directory', () => {
@@ -76,10 +83,15 @@ test('npm tarball excludes client-local state files', () => {
   // compiled-wiki additions
   assert.equal(packedFilePaths.includes('.basb/prompts/11-ingest-source.md'), true);
   assert.equal(packedFilePaths.includes('.basb/prompts/61-knowledge-lint.md'), true);
+  assert.equal(packedFilePaths.includes('.basb/prompts/62-retrieval-refresh.md'), true);
   assert.equal(packedFilePaths.includes('templates/source-note.md'), true);
   assert.equal(packedFilePaths.includes('vault/index.md'), true);
   assert.equal(packedFilePaths.includes('vault/log.md'), true);
   assert.equal(packedFilePaths.includes('vault/sources/.gitkeep'), true);
+  assert.equal(packedFilePaths.includes('vault/retrieval/catalog.md'), true);
+  assert.equal(packedFilePaths.includes('vault/retrieval/question-map.md'), true);
+  assert.equal(packedFilePaths.includes('vault/retrieval/pattern-index.md'), true);
+  assert.equal(packedFilePaths.includes('vault/retrieval/relationship-index.md'), true);
 });
 
 test('package manifest scaffolds the BASB workspace on install', () => {

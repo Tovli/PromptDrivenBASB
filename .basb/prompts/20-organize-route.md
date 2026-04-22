@@ -71,7 +71,7 @@ If the note is moved:
 3. Update `updated_at`.
 4. Fill `route_reason`.
 5. Set `artifact_kind` to the best-fitting value (`concept`, `comparison`, `timeline`, `synthesis`, `source-summary`).
-6. Preserve `derived_from`, `source_ids`, `source_count`, `last_ingested_at`, `claims_last_checked_at`, `supersedes`, and `contradicts` from any prior ingest. Never wipe provenance when only the routing changed.
+6. Preserve `derived_from`, `source_ids`, `source_count`, `last_ingested_at`, `summary_last_refreshed_at`, `claims_last_checked_at`, `supersedes`, and `contradicts` from any prior ingest. Never wipe provenance when only the routing changed.
 7. Refresh `tags`, `related_docs`, and `linked_projects` if needed.
 
 If the note is not moved:

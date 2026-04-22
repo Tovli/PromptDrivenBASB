@@ -2,7 +2,7 @@
 title: "BASB Prompt Catalog"
 purpose: "Describe the available BASB prompt files and how to use them."
 stage: "maintain"
-updated_at: "2026-04-13T11:57:59.8014811+03:00"
+updated_at: "2026-04-21T10:15:00+03:00"
 inputs:
   - ".basb/prompts/"
 outputs:
@@ -34,6 +34,7 @@ Then load only the task-specific prompt and the files selected by that startup d
 - **Immutable sources** live under `vault/sources/`. Each source is captured once, never rewritten. This is an operational provenance layer, not a fifth P.A.R.A. category.
 - **Compiled notes** live in `vault/projects/`, `vault/areas/`, `vault/resources/`, and `vault/archives/`. They synthesize information from one or more immutable sources, carry `artifact_kind` and provenance frontmatter, and are the notes that get distilled, linked, and expressed.
 - **Operational catalogs** are `vault/index.md` (what matters right now) and `vault/log.md` (how the vault has evolved). They are package-owned files and update continuously as the vault changes.
+- **Retrieval artifacts** live under `vault/retrieval/`. They are derived, machine-friendly support files: the catalog, question map, pattern index, and relationship index. They improve search and pattern-finding without becoming a separate source of truth.
 
 ## Core Prompts
 
@@ -54,6 +55,7 @@ Then load only the task-specific prompt and the files selected by that startup d
 - `50-daily-brief.md`: daily orientation brief that surfaces recent ingest and notes needing synthesis
 - `60-weekly-maintenance.md`: weekly cleanup, review, favorite-problem pass, and lint
 - `61-knowledge-lint.md`: structural checks on compiled notes and provenance
+- `62-retrieval-refresh.md`: refresh derived retrieval artifacts for the notes that changed
 - `70-favorite-problems.md`: compare notes to enduring questions, callable during ingest, weekly maintenance, or on demand
 
 ## Validation Checklist
@@ -73,5 +75,5 @@ Before trusting a prompt, check that it:
 3. Classify the task and load only the selected BASB files.
 4. Use `10-capture.md` to dispatch. For durable source material, hand off to `11-ingest-source.md`. For direct compiled-note updates, operate on the existing routed note. For transient conversation, do not persist.
 5. Use `20-organize-route.md` only for compiled notes whose P.A.R.A. destination still needs to be decided.
-6. Apply distill, express, or maintenance prompts as needed.
-7. Update `vault/log.md`, `vault/index.md`, and `state/decision-log.md` when the vault materially changes.
+6. Apply distill, express, or maintenance prompts as needed. Run `62-retrieval-refresh.md` whenever a high-value compiled note is created or materially changed.
+7. Update `vault/log.md`, `vault/index.md`, `vault/retrieval/`, and `state/decision-log.md` when the vault materially changes.

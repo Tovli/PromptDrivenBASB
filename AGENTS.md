@@ -2,7 +2,7 @@
 title: "BASB Agent Instructions"
 type: "state"
 status: "active"
-updated_at: "2026-04-06T17:55:28.7716136+03:00"
+updated_at: "2026-04-21T18:52:14.8991301+03:00"
 tags:
   - "basb"
   - "agent"
@@ -38,7 +38,7 @@ If the task is specific to an existing note, scan its frontmatter before reading
 
 # Core Rules
 
-1. Use P.A.R.A. only for user-facing note organization: `projects`, `areas`, `resources`, `archives`. `vault/sources/`, `vault/index.md`, and `vault/log.md` are operational support artifacts that hold immutable source material, a human-readable catalog, and a knowledge-evolution log. They do not create a fifth P.A.R.A. category.
+1. Use P.A.R.A. only for user-facing note organization: `projects`, `areas`, `resources`, `archives`. `vault/sources/`, `vault/index.md`, `vault/log.md`, and `vault/retrieval/` are operational support artifacts that hold immutable source material, human-readable catalogs and logs, and derived retrieval files. They do not create a fifth P.A.R.A. category.
 2. Preserve source material. Raw sources captured under `vault/sources/` are immutable; distillation, synthesis, and expression create or update derived compiled notes rather than rewrite the source.
 3. Prefer frontmatter for metadata and the markdown body for substance. Compiled notes in P.A.R.A. carry a second classification axis through `artifact_kind` and provenance fields that link back to source notes.
 4. Route by next intended use and actionability, not by topic alone. Routing applies only to compiled notes; `vault/sources/` is never routed into P.A.R.A.
@@ -52,7 +52,7 @@ If the task is specific to an existing note, scan its frontmatter before reading
 
 Operational markdown files should use YAML frontmatter.
 
-Use frontmatter for:
+Use frontmatter for common operational fields:
 
 - `title`
 - `type`
@@ -66,6 +66,21 @@ Use frontmatter for:
 - `route_reason`
 - `confidence`
 
+Compiled notes in P.A.R.A. also use the routed-template fields that make lineage, distillation freshness, and retrieval anchors explicit:
+
+- `artifact_kind`
+- `canonical_id`
+- `derived_from`
+- `source_ids`
+- `source_count`
+- `last_ingested_at`
+- `summary_last_refreshed_at`
+- `claims_last_checked_at`
+- `supersedes`
+- `contradicts`
+
+Source notes use the fields defined in `templates/source-note.md`.
+
 Use vault-relative paths in `related_docs`.
 
 # Repository Layout
@@ -74,7 +89,7 @@ Use vault-relative paths in `related_docs`.
 - `.basb/system/`: package-owned canonical BASB state that refreshes on upgrade
 - `state/`: workspace-local BASB state that must be preserved on upgrade
 - `templates/`: note and brief templates
-- `vault/`: BASB knowledge base. `vault/projects/`, `vault/areas/`, `vault/resources/`, `vault/archives/` hold compiled notes in P.A.R.A. `vault/sources/` holds immutable source notes as an operational provenance layer. `vault/index.md` is the package-owned catalog of high-value compiled notes. `vault/log.md` is the human-readable knowledge-evolution log.
+- `vault/`: BASB knowledge base. `vault/projects/`, `vault/areas/`, `vault/resources/`, `vault/archives/` hold compiled notes in P.A.R.A. `vault/sources/` holds immutable source notes as an operational provenance layer. `vault/index.md` is the package-owned catalog of high-value compiled notes. `vault/log.md` is the human-readable knowledge-evolution log. `vault/retrieval/` holds derived retrieval artifacts such as the catalog, question map, pattern index, and relationship index.
 - `examples/`: sample captures and expected outputs
 
 # Prompt Selection
@@ -93,6 +108,7 @@ Use the smallest prompt that fits the task:
 - daily maintenance: `.basb/prompts/50-daily-brief.md`
 - weekly maintenance: `.basb/prompts/60-weekly-maintenance.md`
 - knowledge lint: `.basb/prompts/61-knowledge-lint.md`
+- retrieval refresh: `.basb/prompts/62-retrieval-refresh.md`
 - favorite problems review: `.basb/prompts/70-favorite-problems.md`
 
 # Routing Contract

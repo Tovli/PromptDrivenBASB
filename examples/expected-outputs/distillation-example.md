@@ -20,6 +20,7 @@ favorite_problems:
   - "How do small teams keep research actionable?"
 route_reason: "Useful reference material for future work on lightweight knowledge systems."
 confidence: 0.91
+canonical_id: "research-operations-small-teams"
 express_outputs: []
 derived_from:
   - "vault/sources/20260413-101500-research-ops-article.md"
@@ -27,6 +28,7 @@ source_ids:
   - "20260413-101500-research-ops-article"
 source_count: 1
 last_ingested_at: "2026-04-13T10:15:00+03:00"
+summary_last_refreshed_at: "2026-04-13T11:57:59+03:00"
 claims_last_checked_at: "2026-04-13T10:15:00+03:00"
 supersedes: []
 contradicts: []

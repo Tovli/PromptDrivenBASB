@@ -28,6 +28,13 @@ Compiled notes that the last knowledge lint flagged as stale, orphaned, or
 missing backlinks. Keep this actionable, not exhaustive.
 -->
 
+# Retrieval Layer Watchlist
+
+<!--
+Question-map entries, pattern pages, or catalog entries that need refresh or
+look newly useful for today's work.
+-->
+
 # Recommended Next Actions
 
 # Sources

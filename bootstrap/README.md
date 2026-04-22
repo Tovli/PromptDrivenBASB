@@ -6,10 +6,10 @@ This workspace implements BASB as a Codex-operated prompt system, not as an exte
 
 - `BASBGuide.md`: the architectural reference document for deeper BASB design work.
 - `.basb/system/`: package-owned canonical BASB state that refreshes on upgrade.
-- `.basb/prompts/`: reusable prompts for BASB operations, including source ingest and knowledge lint.
+- `.basb/prompts/`: reusable prompts for BASB operations, including source ingest, knowledge lint, and retrieval refresh.
 - `state/`: workspace-local BASB state, review queues, and decision logs.
 - `templates/`: note and brief templates with YAML frontmatter, including an immutable source-note template.
-- `vault/`: the working knowledge base. `vault/projects/`, `vault/areas/`, `vault/resources/`, `vault/archives/` hold compiled notes in P.A.R.A. `vault/sources/` preserves immutable source material as an operational provenance layer. `vault/index.md` catalogs high-value compiled notes, and `vault/log.md` logs meaningful knowledge events.
+- `vault/`: the working knowledge base. `vault/projects/`, `vault/areas/`, `vault/resources/`, `vault/archives/` hold compiled notes in P.A.R.A. `vault/sources/` preserves immutable source material as an operational provenance layer. `vault/index.md` catalogs high-value compiled notes, `vault/log.md` logs meaningful knowledge events, and `vault/retrieval/` holds derived retrieval artifacts such as the catalog, question map, pattern index, and relationship index.
 - `examples/`: sample inputs and expected outputs.
 
 ## Core Idea
@@ -42,12 +42,13 @@ Use `.basb/system/` for canonical package rules and `state/` for workspace-local
 ## Typical Workflow
 
 1. Capture or ingest. Durable source material goes through `.basb/prompts/11-ingest-source.md`, which writes an immutable source note in `vault/sources/` and updates derived compiled notes in P.A.R.A.
-2. Create or update compiled notes in `projects`, `areas`, `resources`, or `archives`. Each compiled note carries `artifact_kind` and provenance fields that link back to its source lineage.
+2. Create or update compiled notes in `projects`, `areas`, `resources`, or `archives`. Each compiled note carries `artifact_kind`, provenance fields, and a stable `canonical_id` for the compiled note's retrieval identity. Provenance fields such as `derived_from` and `source_ids` point back to source lineage. Richer aliases, question mappings, and patterns live in `vault/retrieval/`.
 3. Distill the compiled note in layers. Immutable source notes are never rewritten.
-4. Express reusable outputs back into the vault by default so a one-off answer does not stay trapped in a chat.
-5. Run daily and weekly maintenance. Weekly maintenance runs `.basb/prompts/61-knowledge-lint.md` to surface orphans, stale summaries, contradictions, and broken source lineage.
+4. Refresh `vault/retrieval/` with `.basb/prompts/62-retrieval-refresh.md` for any materially changed bounded note set.
+5. Express reusable outputs back into the vault by default so a one-off answer does not stay trapped in a chat.
+6. Run daily and weekly maintenance. Weekly maintenance runs `.basb/prompts/61-knowledge-lint.md` to surface orphans, stale summaries, contradictions, broken source lineage, and retrieval drift.
 
-Meaningful changes are recorded in `vault/log.md`, and high-value pages are cataloged in `vault/index.md`. Everything stays local-first and file-based.
+Meaningful changes are recorded in `vault/log.md`, high-value pages are cataloged in `vault/index.md`, and derived retrieval support files live under `vault/retrieval/`. Everything stays local-first and file-based.
 
 ## Frontmatter Policy
 
@@ -68,7 +69,8 @@ Keep the note body for actual content, extracted insight, and next actions.
 2. For durable source material, hand off to `.basb/prompts/11-ingest-source.md`. The source is preserved verbatim in `vault/sources/` and the compiled notes it affects are updated in P.A.R.A.
 3. If a compiled note's P.A.R.A. destination is still unclear, route with `.basb/prompts/20-organize-route.md`, and escalate with `.basb/prompts/21-human-review.md` only when truly ambiguous.
 4. Distill the compiled note with the `30-32` prompt chain.
-5. Run weekly maintenance via `.basb/prompts/60-weekly-maintenance.md`; it invokes knowledge lint and favorite-problem matching for you.
+5. Refresh `vault/retrieval/` with `.basb/prompts/62-retrieval-refresh.md` after any materially changed bounded note set so retrieval artifacts stay current.
+6. Run weekly maintenance via `.basb/prompts/60-weekly-maintenance.md`; it invokes knowledge lint, retrieval refresh, and favorite-problem matching for you.
 
 ## Scope Boundary
 

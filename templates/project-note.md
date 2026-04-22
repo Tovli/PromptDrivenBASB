@@ -16,6 +16,7 @@ review_cadence: "weekly"
 favorite_problems: []
 route_reason: "<why this is an active project>"
 confidence: 1.0
+canonical_id: "<stable retrieval id>"
 project_deadline: "<optional ISO date>"
 next_action: "<next visible action>"
 express_outputs: []
@@ -23,6 +24,7 @@ derived_from: []
 source_ids: []
 source_count: 0
 last_ingested_at: null
+summary_last_refreshed_at: null
 claims_last_checked_at: null
 supersedes: []
 contradicts: []

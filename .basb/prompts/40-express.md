@@ -2,7 +2,7 @@
 title: "BASB Express"
 purpose: "Produce scoped outputs such as plans, briefs, or syntheses, and persist durable ones back into the vault so the compiled wiki keeps growing."
 stage: "express"
-updated_at: "2026-04-13T11:57:59.8014811+03:00"
+updated_at: "2026-04-21T18:52:14.8991301+03:00"
 inputs:
   - "A clear output goal"
   - "A bounded set of relevant compiled notes, plus the immutable source notes those notes cite when needed"
@@ -16,9 +16,11 @@ requires_review_when:
 related_docs:
   - ".basb/prompts/02-context-selection.md"
   - ".basb/prompts/11-ingest-source.md"
+  - ".basb/prompts/62-retrieval-refresh.md"
   - "templates/daily-brief.md"
   - "vault/index.md"
   - "vault/log.md"
+  - "vault/retrieval/question-map.md"
 tags:
   - "basb"
   - "prompt"
@@ -47,11 +49,12 @@ An expressed output has durable value when any of the following is true:
 When the output is durable, treat expression as a vault-writing act:
 
 1. Save the output as a routed compiled note in the appropriate P.A.R.A. folder using the matching template.
-2. Set `artifact_kind` (often `synthesis`), fill `derived_from` with the contributing compiled notes, fill `source_ids` with any immutable source notes transitively cited, bump `source_count`, and set `last_ingested_at`.
+2. Set `artifact_kind` (often `synthesis`), fill `derived_from` with the contributing compiled notes, fill `source_ids` with any immutable source notes transitively cited, bump `source_count`, and set `last_ingested_at`. If the durable output writes or refreshes the note's `# Executive Summary`, also set `summary_last_refreshed_at`.
 3. Back-link the contributing compiled notes by adding the new note to their `express_outputs` and, when appropriate, their `related_docs`.
 4. Append an entry to `vault/log.md` describing the durable output, the contributing notes, and why it now lives in the vault.
-5. Refresh `vault/index.md` if the new output is a hub, a canonical summary, or otherwise a high-value page.
-6. Append a concise entry to `state/decision-log.md`.
+5. Run `.basb/prompts/62-retrieval-refresh.md` against the new or materially changed compiled note so `vault/retrieval/` stays aligned.
+6. Refresh `vault/index.md` if the new output is a hub, a canonical summary, or otherwise a high-value page.
+7. Append a concise entry to `state/decision-log.md`.
 
 When the output is not durable, return it inline and do not persist it. Do not produce low-value noise notes just to satisfy the persistence rule.
 

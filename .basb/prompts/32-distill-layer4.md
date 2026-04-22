@@ -2,7 +2,7 @@
 title: "BASB Distill Layer 4"
 purpose: "Write a short executive synthesis for the compiled note from the existing distillation layers, without collapsing source and compiled artifacts."
 stage: "distill"
-updated_at: "2026-04-13T11:57:59.8014811+03:00"
+updated_at: "2026-04-22T10:05:29.4606977+03:00"
 inputs:
   - "A compiled note with Layer 2 and preferably Layer 3 already present"
 outputs:
@@ -12,6 +12,7 @@ requires_review_when:
   - "The synthesis would imply claims beyond what the source lineage supports"
 related_docs:
   - ".basb/prompts/31-distill-layer3.md"
+  - ".basb/prompts/62-retrieval-refresh.md"
   - ".basb/prompts/40-express.md"
 tags:
   - "basb"
@@ -34,4 +35,5 @@ Write the shortest useful synthesis of the compiled note so a future self can re
 
 - Update the `# Executive Summary` section at the top of the compiled note.
 - Add 3 to 5 bullets or a short paragraph plus bullets.
-- Update frontmatter `summary`, `updated_at`, `claims_last_checked_at`, and `express_outputs` when relevant.
+- Update frontmatter `summary`, `updated_at`, `summary_last_refreshed_at`, `claims_last_checked_at`, and `express_outputs` when relevant.
+- If Layer 4 materially changes the note's `summary`, run `.basb/prompts/62-retrieval-refresh.md` for that bounded note set so `vault/retrieval/` stays aligned with the revised synthesis.

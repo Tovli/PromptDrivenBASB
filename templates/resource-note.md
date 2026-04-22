@@ -16,6 +16,7 @@ review_cadence: "none"
 favorite_problems: []
 route_reason: "<why this is reference material>"
 confidence: 1.0
+canonical_id: "<stable retrieval id>"
 authors: []
 source_url: "<optional url>"
 express_outputs: []
@@ -23,6 +24,7 @@ derived_from: []
 source_ids: []
 source_count: 0
 last_ingested_at: null
+summary_last_refreshed_at: null
 claims_last_checked_at: null
 supersedes: []
 contradicts: []

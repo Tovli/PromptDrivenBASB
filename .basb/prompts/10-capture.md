@@ -2,7 +2,7 @@
 title: "BASB Capture"
 purpose: "Dispatch new user input to the right flow: transient conversation, direct compiled-note update, or durable source ingest."
 stage: "capture"
-updated_at: "2026-04-13T11:57:59.8014811+03:00"
+updated_at: "2026-04-21T18:52:14.8991301+03:00"
 inputs:
   - "A new user prompt, idea, instruction, question, plan, paste, article, or transcript"
   - "Optional source metadata"
@@ -87,6 +87,7 @@ When the dispatcher creates or updates a compiled note directly, fill at least:
 - `source_ids`
 - `source_count`
 - `last_ingested_at`
+- `summary_last_refreshed_at`
 
 For the inbox fallback:
 

@@ -6,12 +6,12 @@ This workspace implements BASB as a Codex-operated prompt system, not as an exte
 
 - `BASBGuide.md`: the architectural reference document for deeper BASB design work.
 - `.basb/system/`: package-owned canonical BASB state that updates with the package.
-- `.basb/plans/`: the implementation plan for the prompt system.
-- `.basb/prompts/`: reusable prompts for BASB operations, including source ingest and knowledge lint.
+- `.basb/plans/`: implementation plans and ADRs for the prompt system.
+- `.basb/prompts/`: reusable prompts for BASB operations, including source ingest, knowledge lint, and retrieval refresh.
 - `state/`: workspace-local BASB state, review queues, and decision logs.
 - `templates/`: note and brief templates with YAML frontmatter, including an immutable source-note template.
-- `vault/`: the working knowledge base. `vault/projects/`, `vault/areas/`, `vault/resources/`, `vault/archives/` hold compiled notes in P.A.R.A. `vault/sources/` preserves immutable source material as an operational provenance layer. `vault/index.md` is a human-readable catalog of high-value compiled notes, and `vault/log.md` is the knowledge-evolution log.
-- `examples/`: sample inputs and expected outputs, including a source-ingest example.
+- `vault/`: the working knowledge base. `vault/projects/`, `vault/areas/`, `vault/resources/`, and `vault/archives/` hold compiled notes in P.A.R.A. `vault/sources/` preserves immutable source material as an operational provenance layer. `vault/index.md` is a human-readable catalog of high-value compiled notes, `vault/log.md` is the knowledge-evolution log, and `vault/retrieval/` holds derived retrieval artifacts such as the catalog, question map, pattern index, and relationship index.
+- `examples/`: sample inputs and expected outputs, including source-ingest and distillation examples.
 
 ## Core Idea
 
@@ -24,7 +24,7 @@ Codex is the BASB engine.
 
 ## NPM Package
 
-This repository can now be published as the `prompt-driven-basb` npm package.
+This repository can be published as the `prompt-driven-basb` npm package.
 
 Running `npm install prompt-driven-basb` scaffolds the BASB workspace into the current project root. On first install it creates the bundled prompts, templates, examples, vault directories, package-owned `.basb/system/` state, and a bootstrap `state/` folder. On later installs and upgrades it refreshes the package-owned workspace files from the current package version, including `.basb/system/`, while `state/` only fills in missing files and preserves the user's local BASB state.
 
@@ -46,7 +46,7 @@ The intended loop is simple: capture first, organize by next use, and keep movin
 
 ### Current Limits
 
-The package does not currently support direct video or audio transcription. If there is enough demand, or a good PR, that is something I would be happy to examine. For now, the practical workaround is to transcribe the recording with any tool you prefer and then paste the transcription into the BASB system like any other note.
+The package does not currently support direct video or audio transcription. The practical workaround is to transcribe the recording with any tool you prefer and then paste the transcription into the BASB system like any other note.
 
 The package also exposes a small Node API for resolving bundled paths:
 
@@ -54,6 +54,7 @@ The package also exposes a small Node API for resolving bundled paths:
 const { assets, getAssetPath, listPromptFiles } = require('prompt-driven-basb');
 
 console.log(assets.masterPrompt);
+console.log(assets.retrievalDir);
 console.log(getAssetPath('templates/project-note.md'));
 console.log(listPromptFiles());
 ```
@@ -88,12 +89,13 @@ Use `.basb/system/` for canonical package rules and `state/` for workspace-local
 ## Typical Workflow
 
 1. Capture or ingest the input. Durable source material is preserved verbatim in `vault/sources/` via `.basb/prompts/11-ingest-source.md`. Direct compiled-note updates go straight to the relevant P.A.R.A. note.
-2. Create or update compiled notes in `projects`, `areas`, `resources`, or `archives` with `artifact_kind` and provenance frontmatter linking back to the source.
+2. Create or update compiled notes in `projects`, `areas`, `resources`, or `archives` with `artifact_kind`, provenance frontmatter, and a stable `canonical_id` for the compiled note's retrieval identity. Provenance fields such as `derived_from` and `source_ids` point back to the source lineage. Richer aliases, question mappings, and patterns live in `vault/retrieval/`.
 3. Distill the compiled note in layers. Raw sources under `vault/sources/` stay untouched.
-4. Use the compiled note set to express plans, briefs, or syntheses. Persist durable outputs back into the vault by default.
-5. Run daily and weekly maintenance. Weekly maintenance includes `.basb/prompts/61-knowledge-lint.md` to flag orphan notes, stale summaries, contradictions, and broken source lineage.
+4. Refresh `vault/retrieval/` with `.basb/prompts/62-retrieval-refresh.md` for any materially changed bounded note set.
+5. Use the compiled note set to express plans, briefs, or syntheses. Persist durable outputs back into the vault by default.
+6. Run daily and weekly maintenance. Weekly maintenance includes `.basb/prompts/61-knowledge-lint.md` to flag orphan notes, stale summaries, contradictions, broken source lineage, and retrieval drift.
 
-Meaningful ingest, synthesis, and cleanup events are appended to `vault/log.md`, and high-value pages are cataloged in `vault/index.md`. Both files are package-owned and local-first — no services, databases, or schedulers are introduced.
+Meaningful ingest, synthesis, and cleanup events are appended to `vault/log.md`, high-value pages are cataloged in `vault/index.md`, and derived retrieval support files live under `vault/retrieval/`. Everything stays package-owned, local-first, and file-based. No services, databases, or schedulers are introduced.
 
 ## Frontmatter Policy
 
@@ -114,7 +116,8 @@ Keep the note body for actual content, extracted insight, and next actions.
 2. For durable source material, let `.basb/prompts/11-ingest-source.md` create the immutable source note in `vault/sources/` and update or create derived compiled notes in P.A.R.A.
 3. For compiled notes whose destination is unclear, route with `.basb/prompts/20-organize-route.md`. If still ambiguous, escalate with `.basb/prompts/21-human-review.md`.
 4. Distill the compiled note with the `30-32` prompt chain. Immutable sources stay immutable.
-5. Run `.basb/prompts/60-weekly-maintenance.md` weekly; it calls `.basb/prompts/61-knowledge-lint.md` and `.basb/prompts/70-favorite-problems.md` automatically.
+5. Refresh `vault/retrieval/` with `.basb/prompts/62-retrieval-refresh.md` after any materially changed bounded note set so search artifacts stay current.
+6. Run `.basb/prompts/60-weekly-maintenance.md` weekly; it calls `.basb/prompts/61-knowledge-lint.md`, `.basb/prompts/62-retrieval-refresh.md`, and `.basb/prompts/70-favorite-problems.md` automatically.
 
 ## Scope Boundary
 

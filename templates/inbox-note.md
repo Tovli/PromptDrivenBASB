@@ -20,6 +20,7 @@ derived_from: []
 source_ids: []
 source_count: 0
 last_ingested_at: null
+summary_last_refreshed_at: null
 claims_last_checked_at: null
 supersedes: []
 contradicts: []

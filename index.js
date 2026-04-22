@@ -12,8 +12,10 @@ const namedAssetPaths = Object.freeze({
   templatesDir: 'templates',
   stateDir: path.join('bootstrap', 'state'),
   vaultDir: 'vault',
+  retrievalDir: path.join('vault', 'retrieval'),
   masterPrompt: path.join('.basb', 'prompts', '00-master-system.md'),
   capturePrompt: path.join('.basb', 'prompts', '10-capture.md'),
+  retrievalRefreshPrompt: path.join('.basb', 'prompts', '62-retrieval-refresh.md'),
   systemSoul: path.join('.basb', 'system', 'SOUL.md'),
   systemMemory: path.join('.basb', 'system', 'MEMORY.md'),
 });
